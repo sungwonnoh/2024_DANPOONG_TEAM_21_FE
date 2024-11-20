@@ -4,6 +4,7 @@ import Practice from "./assets/Practice.jsx";
 import Word from "./assets/Word.jsx";
 import Helper from "./assets/Helper.jsx";
 import Information from "./assets/Information.jsx";
+import { useNavigate } from "react-router-dom";
 
 export default function Main() {
   const datas = [
@@ -11,23 +12,28 @@ export default function Main() {
       info1: "무인결제기",
       info2: "실습하기",
       component: <Practice />,
+      route: "/practice",
     },
     {
       info1: "무인결제기",
       info2: "단어장",
       component: <Word />,
+      route: "/word",
     },
     {
       info1: "결제 화면",
       info2: "설명 보기",
       component: <Information />,
+      route: "/information",
     },
     {
       info1: "학습",
       info2: "도우미",
       component: <Helper />,
+      route: "/helper",
     },
   ];
+  const navigate = useNavigate();
   return (
     <S.Container>
       <S.Title src={title} alt="title" />
@@ -38,7 +44,7 @@ export default function Main() {
       <S.GridContainer>
         {datas.map((value, index) => {
           return (
-            <S.GridBox key={index}>
+            <S.GridBox key={index} onClick={() => navigate(value.route)}>
               <span>
                 <p>{value.info1}</p>
                 <p>{value.info2}</p>

@@ -1,10 +1,11 @@
 import styled from "styled-components";
+import theme from "../../styles/theme";
+
 import kakao from "./assets/kakao.png";
 
 export const Container = styled.div`
   width: 100%;
   height: 100dvh;
-  // border: 4px lightgrey solid;
 
   display: flex;
   flex-direction: column;
@@ -67,7 +68,7 @@ export const BtnBox = styled.div`
     }
   }
   :last-child {
-    background-color: #6736fa;
+    background-color: ${theme.color.main};
     color: white;
     text-align: center;
     &:active {

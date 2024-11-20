@@ -60,6 +60,8 @@ export const GridBox = styled.div`
   flex-direction: column;
   justify-content: space-around;
 
+  cursor: pointer;
+
   p {
     margin-bottom: 4%;
     font-size: 1.3rem;

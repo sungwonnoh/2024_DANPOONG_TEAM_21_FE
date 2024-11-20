@@ -9,8 +9,6 @@ export const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
-  border: 4px lightgray solid;
 `;
 
 export const Title = styled.img`
@@ -45,7 +43,7 @@ export const GridContainer = styled.div`
   div:nth-child(odd) {
     background-color: ${theme.color.main};
   }
-  div:hover {
+  div:active {
     opacity: 0.5;
   }
 `;

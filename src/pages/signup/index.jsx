@@ -9,7 +9,7 @@ export default function Signup() {
   useEffect(() => {
     setTimeout(() => {
       setIsSplash(false);
-    }, 3000);
+    }, 2000);
   });
   return (
     <>

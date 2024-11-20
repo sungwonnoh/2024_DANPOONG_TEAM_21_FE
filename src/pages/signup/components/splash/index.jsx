@@ -1,10 +1,12 @@
 import * as S from "./splash.style.js";
-import logo from "../../assets/splash_logo.gif";
+// import logo from "../../assets/splash_logo.gif";
+import Lottie from "lottie-react";
+import animationData from "../../assets/splash_logo.json";
 
 export default function Splash() {
   return (
     <S.Container>
-      <img src={logo} alt="로고" />
+      <Lottie loop={false} animationData={animationData} />
     </S.Container>
   );
 }

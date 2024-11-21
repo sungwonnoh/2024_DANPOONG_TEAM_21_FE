@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import restaurant from "../../assets/images/restaurant.png";
+import choice_restaurant from "../../assets/images/choice_restaurant.svg";
 import choice_fastfood from "../../assets/images/choice_fastfood.svg";
 import choice_cafe from "../../assets/images/choice_cafe.svg";
 import theme from "../../styles/theme";
@@ -23,6 +23,7 @@ const Container = styled.div`
 const ShowTitle = styled.div`
   font-size: 21px;
   font-weight: 600;
+  color: ${theme.color.black};
 `;
 const Contents = styled.div`
   font-size: 15px;
@@ -62,11 +63,11 @@ export default function Description() {
 
   const handleClick = (i) => {
     if (i === "restaurant") {
-      navigate("/description/restaurant");
+      navigate(`/description/${i}`);
     } else if (i === "cafe") {
-      navigate("/description/cafe");
+      navigate(`/description/${i}`);
     } else if (i === "fastfood") {
-      navigate("/description/fastfood");
+      navigate(`/description/${i}`);
     }
   };
   return (
@@ -80,7 +81,7 @@ export default function Description() {
         <Choice onClick={() => handleClick("restaurant")}>
           <Title>음식점 </Title>
           <Title>무인결제기</Title>
-          <ChoiceImage src={restaurant} alt="업종선택_음식점" />
+          <ChoiceImage src={choice_restaurant} alt="업종선택_음식점" />
         </Choice>
         <Choice onClick={() => handleClick("cafe")}>
           <Title>카페</Title>

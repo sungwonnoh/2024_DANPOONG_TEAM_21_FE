@@ -9,8 +9,8 @@ const theme = {
     black: "#121212",
     white: "#fcfcfc",
     red: "#ff5323",
-    ui_1: "1a0a77",
-    ui_2: "3f2aa1",
+    ui_1: "#1a0a77",
+    ui_2: "#3f2aa1",
     ui_3: "#b0b7be",
   },
 };

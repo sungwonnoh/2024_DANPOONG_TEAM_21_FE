@@ -1,10 +1,15 @@
 import { createBrowserRouter } from "react-router-dom";
-import Main from "../pages/main";
+import Main from "../pages/main/index";
+import Description from "../pages/main/description";
 
 export const routes = createBrowserRouter([
   {
     path: "/",
-    component: Main,
+    element: <Main />,
+  },
+  {
+    path: "/description",
+    element: <Description />,
   },
 ]);
 

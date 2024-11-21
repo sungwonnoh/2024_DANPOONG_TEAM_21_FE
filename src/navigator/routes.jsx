@@ -1,5 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import Main from "../pages/main/index";
+import Signup from "../pages/signup/index";
+import KakaoRedirect from "../pages/kakaoRedirect";
 import Description from "../pages/main/description";
 import Start_restaurant from "../pages/restaurant/index";
 import Start_cafe from "../pages/cafe/index";
@@ -11,6 +13,13 @@ export const routes = createBrowserRouter([
     element: <Main />,
   },
   {
+    path: "/signup",
+    element: <Signup />,
+  },
+  {
+    path: "/oauth",
+    element: <KakaoRedirect />,
+  },
     path: "/description",
     element: <Description />,
   },

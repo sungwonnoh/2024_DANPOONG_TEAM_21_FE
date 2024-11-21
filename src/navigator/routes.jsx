@@ -20,6 +20,7 @@ export const routes = createBrowserRouter([
     path: "/oauth",
     element: <KakaoRedirect />,
   },
+  {
     path: "/description",
     element: <Description />,
   },

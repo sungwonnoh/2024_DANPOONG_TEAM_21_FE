@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import theme from "../../styles/theme";
 import { motion } from "framer-motion";
+import KakaoButton from "./assets/KakaoButton.png";
 
 export const Container = styled.div`
   width: 100%;
@@ -24,25 +25,29 @@ export const Top = styled.div`
 `;
 
 export const Title = styled.div`
-  width: 80%;
-  margin-bottom: 1vh;
+  width: ${(props) => (props.isComplete ? "100%" : "80%")};
+  margin-bottom: ${(props) => (props.isComplete ? "2vh" : "1vh")};
+
   h1 {
     font-size: 21px;
     font-weight: 700;
     line-height: 31px;
+    text-align: ${(props) => props.isComplete && "center"};
+
     color: ${theme.color.black};
   }
 `;
 
 export const Info = styled.div`
-  width: 80%;
+  width: ${(props) => (props.isComplete ? "100%" : "80%")};
+
   margin-bottom: 10vh;
 
   p {
     font-size: 15px;
 
     color: ${theme.color.gray1};
-
+    text-align: ${(props) => props.isComplete && "center"};
     font-weight: 400;
     line-height: 25px;
   }
@@ -119,11 +124,15 @@ export const StartButton = styled.button`
   border-radius: 8px;
   border: none;
 
-  margin-bottom: 4dvh;
+  margin-bottom: ${(props) => (props.isComplete ? "6.5dvh" : "6dvh")};
 
   cursor: pointer;
 
-  background-color: ${theme.color.main};
+  background-color: ${(props) => !props.isComplete && theme.color.main};
+  background-image: ${(props) => props.isComplete && `url(${KakaoButton})`};
+  background-position: center;
+  background-size: cover;
+
   color: white;
   text-align: center;
   &:active {
@@ -134,29 +143,10 @@ export const StartButton = styled.button`
 export const CompleteContainer = styled(motion.div)`
   width: 100%;
   height: 100dvh;
-  background-color: #f7f7f7;
+
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   z-index: 1000;
-`;
-
-export const CompleteMessage = styled.h1`
-  font-size: 24px;
-  margin-bottom: 20px;
-  color: #333;
-`;
-
-export const CloseButton = styled.button`
-  background-color: #007bff;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-
-  &:hover {
-    background-color: #0056b3;
-  }
 `;

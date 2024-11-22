@@ -6,11 +6,16 @@ import Description from "../pages/main/description";
 import Start_restaurant from "../pages/restaurant/index";
 import Start_cafe from "../pages/cafe/index";
 import Start_fastfood from "../pages/fastfood/index";
+import MainHelp from "../pages/mainhelp";
 
 export const routes = createBrowserRouter([
   {
     path: "/",
     element: <Main />,
+  },
+  {
+    path: "/help",
+    element: <MainHelp />,
   },
   {
     path: "/signup",

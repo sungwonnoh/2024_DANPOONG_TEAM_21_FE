@@ -24,10 +24,9 @@ const GlobalStyles = createGlobalStyle`
 
   body, html {
     height: 100dvh; 
-    min-height: 100vh; 
+    min-height: 100dvh; 
     //max-width: 430px;
-    width : 360px;
-    margin: 0 auto;
+    min-width : 360px;
     overflow-x: hidden; 
     background-color: #fff; 
   }

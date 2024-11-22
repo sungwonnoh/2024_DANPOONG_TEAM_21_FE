@@ -14,8 +14,7 @@ export const Container = styled.div`
 export const Title = styled.img`
   width: 60%;
   align-self: flex-start;
-  margin-left: 31px;
-  margin-bottom: 4%;
+  margin: 20% 0 4% 32px;
 `;
 
 export const Info = styled.div`

@@ -1,10 +1,11 @@
 import * as S from "./cafeMenu.style";
 import exitIcon from "./assets/exitIcon.svg";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import cafe from "../../datas/cafe";
 export default function CafeMenu() {
   const [choice, setChoice] = useState("coffee");
   const cafeData = useRef(cafe.coffee);
+  const [time, setTime] = useState(120);
 
   const handleTabClick = (tab) => {
     setChoice(tab);
@@ -26,6 +27,18 @@ export default function CafeMenu() {
         cafeData.current = cafe.coffee;
     }
   };
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      setTime((time) => time - 1);
+    }, 1000);
+
+    // 0이 되면 카운트가 멈춤
+    if (time === 0) {
+      clearInterval(id);
+    }
+    return () => clearInterval(id);
+  }, [time]);
 
   return (
     <S.App>
@@ -76,9 +89,21 @@ export default function CafeMenu() {
         </S.MenuBox>
         <S.PaymentBox>
           <S.Left></S.Left>
-          <S.Right></S.Right>
+          <S.Right>
+            <S.Top>
+              <button>전체 삭제</button>
+              <div>
+                <h1>남은 시간</h1>
+                <p>{time}초</p>
+              </div>
+            </S.Top>
+            <S.PayBtn>결제하기</S.PayBtn>
+          </S.Right>
         </S.PaymentBox>
-        <S.NavigateBar></S.NavigateBar>
+        <S.NavigateBar>
+          <button>이전 단계로</button>
+          <button>다음 단계로</button>
+        </S.NavigateBar>
       </S.Container>
     </S.App>
   );

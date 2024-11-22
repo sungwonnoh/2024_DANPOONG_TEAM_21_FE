@@ -2,6 +2,12 @@ import CompleteIcon from "./assets/CompleteIcon";
 import * as S from "./mainhelp.style";
 
 export default function CompleteScreen() {
+  const handleOpenKakao = () => {
+    // 카카오톡 앱으로 이동하는 URL
+    const kakaoScheme = "kakaotalk://";
+    // 카카오톡 앱을 실행
+    window.location.href = kakaoScheme;
+  };
   return (
     <S.CompleteContainer
       initial={{ x: "100%" }}
@@ -18,7 +24,7 @@ export default function CompleteScreen() {
         </S.Info>
         <CompleteIcon />
       </S.Top>
-      <S.StartButton isComplete={true} />
+      <S.StartButton isComplete={true} onClick={handleOpenKakao} />
     </S.CompleteContainer>
   );
 }

@@ -7,6 +7,7 @@ import Start_restaurant from "../pages/restaurant/index";
 import Start_cafe from "../pages/cafe/index";
 import Start_fastfood from "../pages/fastfood/index";
 import MainHelp from "../pages/mainhelp";
+import CafeMenu from "../pages/cafe/components/menu";
 
 export const routes = createBrowserRouter([
   {
@@ -36,6 +37,10 @@ export const routes = createBrowserRouter([
   {
     path: "/description/cafe",
     element: <Start_cafe />,
+  },
+  {
+    path: "/description/cafe/menu",
+    element: <CafeMenu />,
   },
   {
     path: "/description/fastfood",

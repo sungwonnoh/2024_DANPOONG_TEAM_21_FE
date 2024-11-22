@@ -3,8 +3,8 @@ import title from "./assets/title.png";
 import Practice from "./assets/Practice.jsx";
 import Word from "./assets/Word.jsx";
 import Helper from "./assets/Helper.jsx";
-import Information from "./assets/Information.jsx";
 import { useNavigate } from "react-router-dom";
+import Description from "./assets/Description.jsx";
 
 export default function Main() {
   const datas = [
@@ -23,8 +23,8 @@ export default function Main() {
     {
       info1: "결제 화면",
       info2: "설명 보기",
-      component: <Information />,
-      route: "/information",
+      component: <Description />,
+      route: "/description",
     },
     {
       info1: "학습",

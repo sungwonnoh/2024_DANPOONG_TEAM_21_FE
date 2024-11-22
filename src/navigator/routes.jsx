@@ -7,7 +7,7 @@ import Start_restaurant from "../pages/restaurant/index";
 import Start_cafe from "../pages/cafe/index";
 import Start_fastfood from "../pages/fastfood/index";
 import MainHelp from "../pages/mainhelp";
-import CafeMenu from "../pages/cafe/components/menu";
+import CafeMenu from "../pages/cafe/cafeMenu.jsx";
 
 export const routes = createBrowserRouter([
   {

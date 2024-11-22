@@ -35,25 +35,27 @@ export default function Main() {
   ];
   const navigate = useNavigate();
   return (
-    <S.Container>
-      <S.Title src={title} alt="title" />
-      <S.Info>
-        <p>설명 보기와 실습 등을 통해 학습을 시작하고,</p>
-        <p>무인결제기 사용법을 익혀보세요.</p>
-      </S.Info>
-      <S.GridContainer>
-        {datas.map((value, index) => {
-          return (
-            <S.GridBox key={index} onClick={() => navigate(value.route)}>
-              <span>
-                <p>{value.info1}</p>
-                <p>{value.info2}</p>
-              </span>
-              <section>{value.component}</section>
-            </S.GridBox>
-          );
-        })}
-      </S.GridContainer>
-    </S.Container>
+    <S.App>
+      <S.Container>
+        <S.Title src={title} alt="title" />
+        <S.Info>
+          <p>설명 보기와 실습 등을 통해 학습을 시작하고,</p>
+          <p>무인결제기 사용법을 익혀보세요.</p>
+        </S.Info>
+        <S.GridContainer>
+          {datas.map((value, index) => {
+            return (
+              <S.GridBox key={index} onClick={() => navigate(value.route)}>
+                <span>
+                  <p>{value.info1}</p>
+                  <p>{value.info2}</p>
+                </span>
+                <section>{value.component}</section>
+              </S.GridBox>
+            );
+          })}
+        </S.GridContainer>
+      </S.Container>
+    </S.App>
   );
 }

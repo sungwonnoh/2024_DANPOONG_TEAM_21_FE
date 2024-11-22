@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import theme from "../../styles/theme";
 import enter_restaurant from "../../assets/images/enter_restaurant.svg";
+import { useNavigate } from "react-router-dom";
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -52,6 +53,8 @@ const Button = styled.div`
 `;
 
 export default function Start_restaurant() {
+  const navigate = useNavigate();
+
   return (
     <Wrapper>
       <Container>
@@ -62,7 +65,9 @@ export default function Start_restaurant() {
       <ImgContainer>
         <Img src={enter_restaurant} alt="음식점 진입" />
       </ImgContainer>
-      <Button>시작하기</Button>
+      <Button onClick={() => navigate("/description/restaurant/main")}>
+        시작하기
+      </Button>
     </Wrapper>
   );
 }

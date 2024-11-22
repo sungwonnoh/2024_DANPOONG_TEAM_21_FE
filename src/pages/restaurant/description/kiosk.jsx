@@ -2,13 +2,17 @@ import styled from "styled-components";
 import theme from "../../../styles/theme";
 import { useEffect } from "react";
 import fish from "../../../assets/images/restaurant/fish.png";
+import Gultangmyeon from "../../../assets/images/restaurant/Gultangmyeon.png";
+import sweetPotato from "../../../assets/images/restaurant/sweetPotato.png";
+import { NextBtn, PrevBtn } from "../../../components/stepBtn";
 
 const Wrapper = styled.div`
   display: flex;
-  flex-direction: row; /* 가로 배치 */
+  flex-direction: row;
   justify-content: space-between;
   align-items: stretch;
-  height: 100vh; /* 화면 전체 높이 */
+  margin-top: 54px;
+  height: 80vh; /* 화면 전체 높이 */
   width: 100vw; /* 화면 전체 너비 */
 `;
 const Sidebar = styled.div`
@@ -37,17 +41,38 @@ const Container = styled.div`
 const MenuContainer = styled.div`
   display: flex;
   flex-direction: row;
+  gap: 8px;
 `;
 const MenuItem = styled.div`
   width: 191px;
   height: 192px;
   border: 1px solid ${theme.color.gray2};
+  color: ${theme.color.black};
   border-radius: 8px;
   display: flex;
   flex-direction: column;
+  padding: 4px;
 `;
-const Menu = styled.div``;
-const Price = styled.div``;
+const Img = styled.img`
+  border-radius: 8px;
+`;
+const Menu = styled.div`
+  font-size: 17px;
+  font-weight: 600;
+  margin: 4px;
+`;
+const Price = styled.div`
+  font-size: 15px;
+  font-weight: 500;
+  margin: 0 4px;
+`;
+const BtnContainer = styled.div`
+  position: fixed;
+  bottom: 16px;
+  left: 16px;
+  display: flex;
+  gap: 8px;
+`;
 export default function Kiosk() {
   const sideItems = ["런치세트", "시즌메뉴", "메인", "사이드"];
   const MenuItems = [
@@ -61,14 +86,14 @@ export default function Kiosk() {
     {
       title: "굴탕면",
       price: "21,000원",
-      image: fish,
+      image: Gultangmyeon,
       //onClick: () => handleClick("option"),
       onClick: () => console.log("굴탕면 선택"),
     },
     {
       title: "고구마맛탕",
       price: "12,000원",
-      image: fish,
+      image: sweetPotato,
       //onClick: () => handleClick("option"),
       onClick: () => console.log("고구마맛탕 선택"),
     },
@@ -122,13 +147,17 @@ export default function Kiosk() {
           <MenuContainer>
             {MenuItems.map((menu, index) => (
               <MenuItem key={index} onClick={menu.onClick}>
-                <img src={menu.image} alt={menu.title} />
+                <Img src={menu.image} alt={menu.title} />
                 <Menu>{menu.title}</Menu>
                 <Price>{menu.price}</Price>
               </MenuItem>
             ))}
           </MenuContainer>
         </Container>
+        <BtnContainer>
+          <PrevBtn></PrevBtn>
+          <NextBtn></NextBtn>
+        </BtnContainer>
       </Wrapper>
     </>
   );

@@ -20,13 +20,14 @@ export const Container = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  background-color: ${theme.color.white};
 
   border: 4px lightgray solid;
 `;
 
 export const Header = styled.div`
   width: 100%;
-  height: 13dvh;
+  height: 12dvh;
 
   display: flex;
   flex-direction: column;
@@ -66,4 +67,81 @@ export const TabBar = styled.div`
       font-weight: 600;
     }
   }
+`;
+
+/* menu */
+export const MenuBox = styled.div`
+  width: 88%;
+  height: 55dvh;
+  padding: 8dvh 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 2%;
+  overflow-y: auto;
+`;
+export const Menu = styled.div`
+  width: 105px;
+  height: 145px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1%;
+
+  border-radius: 8px;
+  border: 1px ${theme.color.gray2} solid;
+
+  text-align: flex-start;
+  color: ${theme.color.black};
+
+  img {
+    width: 92%;
+    object-fit: cover;
+  }
+
+  h1 {
+    width: 84%;
+
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 25px;
+  }
+  p {
+    width: 84%;
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 11px;
+  }
+`;
+
+/* payment */
+export const PaymentBox = styled.div`
+  width: 100%;
+  height: 20dvh;
+  // background: red;
+  display: flex;
+  align-items: center;
+  gap: 2%;
+  padding: 0 4%;
+`;
+
+export const Left = styled.div`
+  width: 65%;
+  height: 88%;
+  background-color: ${theme.color.gray3};
+  border-radius: 8px;
+`;
+
+export const Right = styled.div`
+  width: 35%;
+  height: 88%;
+  background-color: ${theme.color.gray2};
+  border-radius: 8px;
+`;
+
+/* navigateBar */
+export const NavigateBar = styled.div`
+  width: 100%;
+  height: 10dvh;
+  // background: green;
 `;

@@ -11,7 +11,7 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
 
-  border: 4px lightgray solid;
+  // border: 4px lightgray solid;
 `;
 
 export const Top = styled.div`

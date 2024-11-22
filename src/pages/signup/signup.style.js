@@ -11,6 +11,8 @@ export const Container = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+
+  // border: 4px lightgray solid;
 `;
 
 export const Top = styled.div`
@@ -40,7 +42,7 @@ export const BtnBox = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-bottom: 12%;
+  margin-bottom: 6dvh;
   gap: 4%;
 
   button {

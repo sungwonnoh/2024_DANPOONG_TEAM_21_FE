@@ -14,7 +14,7 @@ export default function Signup() {
     }, 2000);
   });
   return (
-    <>
+    <S.App>
       {isSplash ? (
         <Splash />
       ) : (
@@ -31,6 +31,6 @@ export default function Signup() {
           </S.BtnBox>
         </S.Container>
       )}
-    </>
+    </S.App>
   );
 }

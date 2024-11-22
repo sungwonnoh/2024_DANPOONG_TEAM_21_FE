@@ -6,6 +6,7 @@ import Description from "../pages/main/description";
 import Start_restaurant from "../pages/restaurant/index";
 import Start_cafe from "../pages/cafe/index";
 import Start_fastfood from "../pages/fastfood/index";
+import Kiosk from "../pages/restaurant/description/kiosk";
 
 export const routes = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ export const routes = createBrowserRouter([
   {
     path: "/description/fastfood",
     element: <Start_fastfood />,
+  },
+  {
+    path: "/description/restaurant/main",
+    element: <Kiosk />,
   },
 ]);
 

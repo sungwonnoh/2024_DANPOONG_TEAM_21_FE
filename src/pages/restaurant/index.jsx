@@ -5,7 +5,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-
+  align-items: center;
   //padding: 20px;
   margin-top: 54px;
   height: 90vh;
@@ -45,6 +45,7 @@ const Button = styled.div`
   background-color: ${theme.color.main};
   color: ${theme.color.white};
   padding: 10px;
+  margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: center;

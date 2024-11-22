@@ -5,18 +5,46 @@ import fish from "../../../assets/images/restaurant/fish.png";
 import Gultangmyeon from "../../../assets/images/restaurant/Gultangmyeon.png";
 import sweetPotato from "../../../assets/images/restaurant/sweetPotato.png";
 import { NextBtn, PrevBtn } from "../../../components/stepBtn";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Wrapper = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+`;
+const Header = styled.div`
+  height: 49px;
+  background-color: ${theme.color.gray2};
+  display: flex;
+  align-items: center;
   justify-content: space-between;
-  align-items: stretch;
-  margin-top: 54px;
-  height: 80vh; /* 화면 전체 높이 */
-  width: 100vw; /* 화면 전체 너비 */
+`;
+const TableNum = styled.div`
+  display: flex;
+  color: ${theme.color.white};
+  background-color: ${theme.color.ui_2};
+  font-size: 15px;
+  font-weight: 500;
+  height: 49px;
+  width: 93px;
+  border-radius: 0px 0px 0px 8px;
+  margin-left: auto;
+  align-items: center;
+  justify-content: center;
+`;
+const Body = styled.div`
+  display: flex;
+  flex: 1;
+`;
+const BlackSide = styled.div`
+  background-color: ${theme.color.black};
+  max-width: 56px;
+  width: 5vw;
+  //height: 100vh;
 `;
 const Sidebar = styled.div`
-  width: 20%;
+  width: 15%;
   min-width: 150px; //반응형때문
   padding: 16px;
   display: flex;
@@ -27,7 +55,8 @@ const Items = styled.div`
   width: 100%; //92px
   height: 48px;
   border-radius: 8px;
-  background-color: ${theme.color.ui_3};
+  background-color: ${(props) =>
+    props.active ? theme.color.main : theme.color.ui_3};
   color: ${theme.color.white};
   font-size: 17px;
   font-weight: 500;
@@ -37,6 +66,11 @@ const Items = styled.div`
 `;
 const Container = styled.div`
   width: 80%;
+  flex: 1;
+  margin: 8px;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
 `;
 const MenuContainer = styled.div`
   display: flex;
@@ -98,6 +132,17 @@ export default function Kiosk() {
       onClick: () => console.log("고구마맛탕 선택"),
     },
   ];
+
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const queryParams = new URLSearchParams(location.search);
+  const selectedOption = queryParams.get("option");
+
+  const handleClick = (item) => {
+    navigate(`?option=${item}`);
+  };
+
   useEffect(() => {
     const lockOrientation = async () => {
       try {
@@ -113,47 +158,45 @@ export default function Kiosk() {
       }
     };
 
-    const unlockOrientation = async () => {
-      try {
-        if (screen.orientation && screen.orientation.lock) {
-          await screen.orientation.lock("portrait");
-          console.log("Screen reset to portrait");
-        }
-      } catch (err) {
-        console.error(
-          "Screen orientation reset failed:",
-          err.name,
-          err.message
-        );
-      }
-    };
-
     lockOrientation();
-
-    return () => {
-      unlockOrientation();
-    };
   }, []);
 
   return (
     <>
       <Wrapper>
-        <Sidebar>
-          {sideItems.map((item, index) => (
-            <Items key={index}>{item}</Items>
-          ))}
-        </Sidebar>
-        <Container>
-          <MenuContainer>
-            {MenuItems.map((menu, index) => (
-              <MenuItem key={index} onClick={menu.onClick}>
-                <Img src={menu.image} alt={menu.title} />
-                <Menu>{menu.title}</Menu>
-                <Price>{menu.price}</Price>
-              </MenuItem>
+        <Header>
+          <TableNum>테이블 1</TableNum>
+        </Header>
+
+        {/*body*/}
+        <Body>
+          <BlackSide />
+          <Sidebar>
+            {sideItems.map((item, index) => (
+              <Items
+                key={index}
+                active={item === selectedOption}
+                onClick={() => handleClick(item)}
+              >
+                {item}
+              </Items>
             ))}
-          </MenuContainer>
-        </Container>
+          </Sidebar>
+          <Container>
+            <MenuContainer>
+              {MenuItems.map((menu, index) => (
+                <MenuItem key={index} onClick={menu.onClick}>
+                  <Img src={menu.image} alt={menu.title} />
+                  <Menu>{menu.title}</Menu>
+                  <Price>{menu.price}</Price>
+                </MenuItem>
+              ))}
+            </MenuContainer>
+          </Container>
+          <BlackSide />
+        </Body>
+
+        {/* {Button} */}
         <BtnContainer>
           <PrevBtn></PrevBtn>
           <NextBtn></NextBtn>

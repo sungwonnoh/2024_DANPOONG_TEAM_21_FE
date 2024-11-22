@@ -1,11 +1,12 @@
 import styled from "styled-components";
 import theme from "../../../styles/theme";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import fish from "../../../assets/images/restaurant/fish.png";
 import Gultangmyeon from "../../../assets/images/restaurant/Gultangmyeon.png";
 import sweetPotato from "../../../assets/images/restaurant/sweetPotato.png";
 import { NextBtn, PrevBtn } from "../../../components/stepBtn";
 import { useLocation, useNavigate } from "react-router-dom";
+import DetailOption from "../../../components/modal/detailoption";
 
 const Wrapper = styled.div`
   display: flex;
@@ -143,6 +144,18 @@ export default function Kiosk() {
     navigate(`?option=${item}`);
   };
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedMenu, setSelectedMenu] = useState(null);
+
+  const handleMenuClick = (menu) => {
+    setSelectedMenu(menu);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setSelectedMenu(null);
+    setIsModalOpen(false);
+  };
   useEffect(() => {
     const lockOrientation = async () => {
       try {
@@ -185,7 +198,7 @@ export default function Kiosk() {
           <Container>
             <MenuContainer>
               {MenuItems.map((menu, index) => (
-                <MenuItem key={index} onClick={menu.onClick}>
+                <MenuItem key={index} onClick={() => handleMenuClick(menu)}>
                   <Img src={menu.image} alt={menu.title} />
                   <Menu>{menu.title}</Menu>
                   <Price>{menu.price}</Price>
@@ -201,6 +214,11 @@ export default function Kiosk() {
           <PrevBtn></PrevBtn>
           <NextBtn></NextBtn>
         </BtnContainer>
+        <DetailOption
+          isOpen={isModalOpen}
+          onClose={handleCloseModal}
+          menu={selectedMenu}
+        />
       </Wrapper>
     </>
   );

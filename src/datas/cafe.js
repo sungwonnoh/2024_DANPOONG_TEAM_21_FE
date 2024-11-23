@@ -66,4 +66,48 @@ const cafe = {
   ],
 };
 
-export default cafe;
+const beverageOptions = [
+  {
+    option: "무료 옵션",
+    info: [
+      {
+        name: "얼음 적게",
+        price: 0,
+      },
+      {
+        name: "얼음 많이",
+        price: 0,
+      },
+      {
+        name: "덜 달게",
+        price: 0,
+      },
+    ],
+  },
+  {
+    option: "유료 옵션",
+    info: [
+      {
+        name: "샷 추가",
+        price: 300,
+      },
+      {
+        name: "휘핑 추가",
+        price: 500,
+      },
+    ],
+  },
+];
+const dessertOptions = [
+  {
+    option: "무료 옵션",
+    info: [
+      {
+        name: "뜨겁게 (10분 소요)",
+        price: 0,
+      },
+    ],
+  },
+];
+
+export { cafe, beverageOptions, dessertOptions };

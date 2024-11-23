@@ -13,7 +13,7 @@ export const App = styled.div`
 
 export const Container = styled.div`
   width: 100%;
-  max-width: 400px;
+  // max-width: 400px;
   height: 100dvh;
 
   display: flex;
@@ -22,7 +22,7 @@ export const Container = styled.div`
   align-items: center;
   background-color: ${theme.color.white};
 
-  border: 4px lightgray solid;
+  // border: 4px lightgray solid;
 `;
 
 export const Header = styled.div`
@@ -38,7 +38,10 @@ export const Header = styled.div`
 
   img {
     margin-left: 4%;
-    width: 4%;
+    width: 2%;
+    @media (max-width: 500px) {
+      width: 4%;
+    }
     object-fit: cover;
     cursor: pointer;
   }
@@ -72,16 +75,17 @@ export const TabBar = styled.div`
 /* menu */
 export const MenuBox = styled.div`
   width: 88%;
-  height: 55dvh;
+  height: 53dvh;
   padding: 8dvh 0;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 2%;
-  overflow-y: auto;
+  overflow: auto;
 `;
 export const Menu = styled.div`
-  width: 105px;
-  height: 145px;
+  // width: 105px;
+  width: 100%;
+  height: 26dvh;
 
   display: flex;
   flex-direction: column;
@@ -103,13 +107,13 @@ export const Menu = styled.div`
     width: 84%;
 
     font-weight: 600;
-    font-size: 15px;
+    font-size: 1rem;
     line-height: 25px;
   }
   p {
     width: 84%;
     font-weight: 400;
-    font-size: 11px;
+    font-size: 0.8rem;
     line-height: 11px;
   }
 `;
@@ -126,10 +130,58 @@ export const PaymentBox = styled.div`
 `;
 
 export const Left = styled.div`
-  width: 65%;
+  width: 70%;
   height: 88%;
   background-color: ${theme.color.gray3};
   border-radius: 8px;
+  overflow-y: auto;
+`;
+
+export const Info = styled.div`
+  width: 88%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+
+  margin-left: 12%;
+  padding: 4% 0;
+
+  section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  h1,
+  h2 {
+    margin-right: 1vh;
+    font-weight: 800;
+    font-size: 15px;
+    line-height: 25px;
+    text-align: center;
+  }
+  h1 {
+    color: ${theme.color.ui_2};
+  }
+  h2 {
+    color: ${theme.color.black};
+  }
+
+  p {
+    margin: 0 0 1vh 1vh;
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 11px;
+    text-align: flex-start;
+
+    color: ${theme.color.ui_1};
+  }
+`;
+
+export const Option = styled.div`
+  display: flex;
+  width: 100%;
 `;
 
 export const Right = styled.div`
@@ -164,7 +216,10 @@ export const Top = styled.div`
     border: none;
 
     font-weight: 600;
-    font-size: 11px;
+    font-size: 1rem;
+    @media (max-width: 500px) {
+      font-size: 11px;
+    }
     line-height: 11px;
 
     color: ${theme.color.white};
@@ -176,19 +231,21 @@ export const Top = styled.div`
 
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
 
     h1 {
-      margin-top: 16%;
       font-size: 11px;
       line-height: 11px;
       color: ${theme.color.black};
     }
     p {
       font-weight: 600;
-      font-size: 15px;
-      line-height: 25px;
+      font-size: 1.5rem;
+      @media (max-width: 500px) {
+        font-size: 15px;
+      }
+      vertical-align: center;
       color: ${theme.color.ui_2};
     }
   }
@@ -208,7 +265,10 @@ export const PayBtn = styled.div`
   cursor: pointer;
 
   font-weight: 600;
-  font-size: 17px;
+  font-size: 1.5rem;
+  @media (max-width: 500px) {
+    font-size: 15px;
+  }
   line-height: 27px;
 
   color: ${theme.color.white};
@@ -231,7 +291,7 @@ export const NavigateBar = styled.div`
     text-align: center;
 
     font-weight: 600;
-    font-size: 11px;
+    font-size: 1rem;
     line-height: 11px;
 
     color: ${theme.color.white};

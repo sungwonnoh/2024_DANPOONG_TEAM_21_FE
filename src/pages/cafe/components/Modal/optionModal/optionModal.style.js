@@ -143,7 +143,7 @@ export const Item = styled.div`
   border-radius: 8px;
 `;
 export const BtnBox = styled.div`
-  width: 64vh;
+  width: 100%;
   height: 9dvh;
   padding-right: 1vh;
   gap: 1vh;
@@ -160,6 +160,9 @@ export const BtnBox = styled.div`
 
     color: ${theme.color.white};
     font-size: 1.5rem;
+    @media (max-width: 500px) {
+      font-size: 1rem;
+    }
     font-weight: 700;
 
     &:first-child {

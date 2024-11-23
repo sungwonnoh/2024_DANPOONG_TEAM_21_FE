@@ -53,12 +53,13 @@ export const Header = styled.div`
 export const Bottom = styled.div`
   width: 100%;
   height: 60dvh;
-  border: 2px red solid;
+  // border: 2px red solid;
 
   display: flex;
   flex-direction: column;
   // justify-content: center;
   align-items: flex-start;
+  gap: 1%;
 
   overflow-y: auto;
 
@@ -70,7 +71,6 @@ export const Bottom = styled.div`
     justify-content: center;
     align-items: center;
     background-color: ${theme.color.gray3};
-    border: 1px black solid;
   }
 
   h1,
@@ -90,7 +90,7 @@ export const Bottom = styled.div`
   }
 
   p {
-    width: 30%;
+    width: 50%;
     margin: 0 0 1vh 5vh;
     font-weight: 400;
     font-size: 15px;
@@ -104,7 +104,7 @@ export const Option = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 50%;
+  width: 100%;
   margin-bottom: 1vh;
 `;
 
@@ -127,6 +127,9 @@ export const BtnBox = styled.div`
 
     color: ${theme.color.white};
     font-size: 1.5rem;
+    @media (max-width: 500px) {
+      font-size: 1rem;
+    }
     font-weight: 700;
 
     &:first-child {

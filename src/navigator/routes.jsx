@@ -8,13 +8,20 @@ import Start_fastfood from "../pages/fastfood/index";
 import Kiosk from "../pages/restaurant/description/kiosk";
 import KioskPractice from "../pages/restaurant/practice/kiosk.jsx";
 import MainHelp from "../pages/mainhelp";
-import CafeMenu from "../pages/cafe/cafeMenu.jsx";
-import CompleteScreen from "../pages/cafe/CompleteScreen.jsx";
+import CafeMenu from "../pages/cafe/practice/cafeMenu.jsx";
+import CafeMenuCommon from "../pages/cafe/description/cafeMenuCommon.jsx";
+import CompleteScreen from "../pages/cafe/description/completeScreen.jsx";
 import FinishRestaurant from "../pages/restaurant/description/finish.jsx";
 import Practice from "../pages/main/practice.jsx";
 import Question from "../pages/restaurant/practice/question.jsx";
 import Complete from "../pages/restaurant/practice/complete.jsx";
 import Failed from "../pages/restaurant/practice/failed.jsx";
+import TutorialDescription from "../pages/helper/tutorial/tutorial.jsx";
+import Tutorial from "../pages/helper/tutorial/index.jsx";
+import Helper from "../pages/helper/index.jsx";
+import Video from "../pages/helper/video/index.jsx";
+import Loading from "../pages/helper/video/loading.jsx";
+
 
 const routes = [
   {
@@ -41,6 +48,28 @@ const routes = [
     component: KakaoRedirect,
     headerOptions: { headerShown: false },
   },
+  /* 학습도우미 */
+  {
+    path: "/helper",
+    element: <Helper />,
+  },
+  {
+    path: "/helper/tutorial",
+    element: <Tutorial />,
+  },
+  {
+    path: "/helper/tutorial/:id",
+    element: <TutorialDescription />,
+  },
+  {
+    path: "/helper/video",
+    element: <Video />,
+  },
+  {
+    path: "/helper/video/loading",
+    element: <Loading />,
+  },
+  /* 설명하기 */
   {
     path: "/description",
     component: Description,
@@ -70,8 +99,9 @@ const routes = [
   },
   {
     path: "/description/cafe/menu",
-    component: CafeMenu,
+    component: CafeMenuCommon,
     headerOptions: { headerShown: false },
+
   },
   {
     path: "/description/cafe/complete",
@@ -131,5 +161,14 @@ const routes = [
     headerOptions: { headerShown: false },
   },
 ];
+
+
+  /* 실습하기 */
+  {
+    path: "/practice/cafe/menu",
+    component: CafeMenu ,
+  },
+]);
+
 
 export default routes;

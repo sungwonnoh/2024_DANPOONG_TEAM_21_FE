@@ -1,5 +1,5 @@
 import * as S from "./completeScreen.style.js";
-import completeIcon from "./assets/completeIcon.svg";
+import completeIcon from "../assets/completeIcon.svg";
 import { useNavigate } from "react-router-dom";
 export default function CompleteScreen() {
   const navigate = useNavigate();
@@ -22,7 +22,7 @@ export default function CompleteScreen() {
         </button>
         <button onClick={() => navigate("/practice")}>실습 도전하기</button>
       </S.BtnBox>
-      <S.PrevBtn onClick={() => navigate(-1)}>이전 단계로</S.PrevBtn>
+      <S.PrevBtn onClick={() => navigate("/")}>이전 단계로</S.PrevBtn>
     </S.CompleteContainer>
   );
 }

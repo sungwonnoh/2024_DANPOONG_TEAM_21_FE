@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import theme from "../../styles/theme.js";
+import theme from "../../../styles/theme";
 
 export const App = styled.div`
   width: 100%;
@@ -83,9 +83,8 @@ export const MenuBox = styled.div`
   overflow: auto;
 `;
 export const Menu = styled.div`
-  // width: 105px;
   width: 100%;
-  height: 26dvh;
+  height: 23dvh;
 
   display: flex;
   flex-direction: column;
@@ -292,6 +291,9 @@ export const NavigateBar = styled.div`
 
     font-weight: 600;
     font-size: 1rem;
+    @media (max-width: 500px) {
+      font-size: 0.75rem;
+    }
     line-height: 11px;
 
     color: ${theme.color.white};
@@ -303,4 +305,5 @@ export const NavigateBar = styled.div`
       background-color: ${theme.color.main};
     }
   }
+  z-index: 7000;
 `;

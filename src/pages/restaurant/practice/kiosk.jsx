@@ -9,6 +9,14 @@ import { useNavigate, useParams } from "react-router-dom";
 import DetailOption from "../../../components/modal/detailoption";
 import AddToCartModal from "../../../components/modal/addToCartModal";
 import ShoppingCart from "../../../components/shoppingcart";
+import {
+  ClosePractice,
+  ShowDescription,
+  ShowPractice,
+  WordBtn,
+} from "../../../components/practiceBtn";
+import CloseModal from "../../../components/modal/closeModal";
+import ShowPracticeModal from "../../../components/modal/showPracticeModal";
 
 const Wrapper = styled.div`
   display: flex;
@@ -111,6 +119,7 @@ const BtnContainer = styled.div`
   left: 16px;
   display: flex;
   gap: 8px;
+  z-index: 900;
 `;
 export default function Practice() {
   const sideItems = ["런치세트", "시즌메뉴", "메인", "사이드"];
@@ -127,6 +136,8 @@ export default function Practice() {
   const [showAddedModal, setShowAddedModal] = useState(false); // Alert modal
   const { option } = useParams();
   const [selectedOption, setSelectedOption] = useState(option || "시즌메뉴");
+  const [isCloseModalOpen, setIsCloseModalOpen] = useState(false);
+  const [isShowPractice, setIsShowPractice] = useState(false);
   const navigate = useNavigate();
 
   const handleClick = (item) => {
@@ -138,10 +149,17 @@ export default function Practice() {
     setSelectedMenu(menu);
     setIsModalOpen(true);
   };
-
+  const handleOpenModal = () => {
+    setIsCloseModalOpen(true); // 모달 열기
+  };
+  const handleShowModal = () => {
+    setIsShowPractice(true);
+  };
   const handleCloseModal = () => {
     setSelectedMenu(null);
     setIsModalOpen(false);
+    setIsCloseModalOpen(false);
+    setIsShowPractice(false);
   };
 
   const handleAddToCart = (item) => {
@@ -197,8 +215,12 @@ export default function Practice() {
 
       {/* Navigation Buttons */}
       <BtnContainer>
-        <PrevBtn />
-        <NextBtn />
+        <ShowPractice onClick={handleShowModal} />
+        <WordBtn />
+        <ShowDescription
+          onClick={() => navigate("/description/restaurant/main")}
+        />
+        <ClosePractice onClick={handleOpenModal} />
       </BtnContainer>
 
       {/* Modals */}
@@ -221,6 +243,8 @@ export default function Practice() {
           setCartItems={setCartItems}
         />
       )}
+      <ShowPracticeModal isOpen={isShowPractice} onClose={handleCloseModal} />
+      <CloseModal isOpen={isCloseModalOpen} onClose={handleCloseModal} />
     </Wrapper>
   );
 }

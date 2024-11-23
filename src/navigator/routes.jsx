@@ -6,11 +6,13 @@ import Start_restaurant from "../pages/restaurant/index";
 import Start_cafe from "../pages/cafe/index";
 import Start_fastfood from "../pages/fastfood/index";
 import Kiosk from "../pages/restaurant/description/kiosk";
+import KioskPractice from "../pages/restaurant/practice/kiosk.jsx";
 import MainHelp from "../pages/mainhelp";
 import CafeMenu from "../pages/cafe/cafeMenu.jsx";
 import CompleteScreen from "../pages/cafe/CompleteScreen.jsx";
 import FinishRestaurant from "../pages/restaurant/description/finish.jsx";
 import Practice from "../pages/main/practice.jsx";
+import Question from "../pages/restaurant/practice/question.jsx";
 
 const routes = [
   {
@@ -101,6 +103,20 @@ const routes = [
       showBackButton: true,
       headerShown: true,
     },
+  },
+  {
+    path: "/practice/restaurant",
+    component: Question,
+    headerOptions: {
+      title: "실습하기",
+      showBackButton: true,
+      headerShown: true,
+    },
+  },
+  {
+    path: "/practice/restaurant/1",
+    component: KioskPractice,
+    headerOptions: { headerShown: false },
   },
 ];
 

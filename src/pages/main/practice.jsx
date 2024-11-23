@@ -22,7 +22,7 @@ export default function Practice() {
   const navigate = useNavigate();
 
   const handleClick = (type) => {
-    navigate(`/description/${type}`);
+    navigate(`/practice/${type}`);
   };
 
   const choices = [
@@ -45,10 +45,11 @@ export default function Practice() {
   return (
     <Wrapper>
       <Container>
-        <ShowTitle>무인결제기 실습하기</ShowTitle>
-        <Contents>실습하고 싶은 업종을 고르면</Contents>
-        <Contents>해당하는 업종의 무인결제기를 실습할 수 있어요.</Contents>
+        <ShowTitle>'음식점' 결제 화면 실습 문제</ShowTitle>
+        <Contents>'음식점' 결제 예시는 가로 키오스크 형태입니다.</Contents>
+        <Contents>화면을 가로로 돌려서 진행해주세요!</Contents>
       </Container>
+
       <Choices>
         {choices.map((choice, index) => (
           <StartCard

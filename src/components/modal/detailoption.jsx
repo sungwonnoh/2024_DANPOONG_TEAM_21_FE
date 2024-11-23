@@ -2,8 +2,6 @@ import Modal from "react-modal";
 import { useState } from "react";
 import styled from "styled-components";
 import theme from "../../styles/theme";
-import AddToCartModal from "./addToCartModal";
-import ShoppingCart from "../shoppingcart";
 
 Modal.setAppElement("#root");
 

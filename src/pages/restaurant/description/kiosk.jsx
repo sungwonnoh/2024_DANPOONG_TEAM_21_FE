@@ -35,7 +35,7 @@ const TableNum = styled.div`
   margin-left: auto;
   align-items: center;
   justify-content: center;
-  z-index: 9999;
+  z-index: 100;
 `;
 const Body = styled.div`
   display: flex;

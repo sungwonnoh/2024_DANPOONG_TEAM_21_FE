@@ -12,6 +12,9 @@ import CafeMenu from "../pages/cafe/practice/cafeMenu.jsx";
 import CafeMenuCommon from "../pages/cafe/description/cafeMenuCommon.jsx";
 import CompleteScreen from "../pages/cafe/description/completeScreen.jsx";
 import FinishRestaurant from "../pages/restaurant/description/finish.jsx";
+import TutorialDescription from "../pages/helper/tutorial/tutorial.jsx";
+import Tutorial from "../pages/helper/tutorial/index.jsx";
+import Helper from "../pages/helper/index.jsx";
 
 export const routes = createBrowserRouter([
   {
@@ -30,6 +33,20 @@ export const routes = createBrowserRouter([
     path: "/oauth",
     element: <KakaoRedirect />,
   },
+  /* 학습도우미 */
+  {
+    path: "/helper",
+    element: <Helper />,
+  },
+  {
+    path: "/helper/tutorial",
+    element: <Tutorial />,
+  },
+  {
+    path: "/helper/tutorial/:id",
+    element: <TutorialDescription />,
+  },
+  /* 설명하기 */
   {
     path: "/description",
     element: <Description />,
@@ -62,6 +79,8 @@ export const routes = createBrowserRouter([
     path: "/description/restaurant/complete",
     element: <FinishRestaurant />,
   },
+
+  /* 실습하기 */
   {
     path: "/practice/cafe/menu",
     element: <CafeMenu />,

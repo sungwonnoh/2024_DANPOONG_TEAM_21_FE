@@ -1,4 +1,3 @@
-import { createBrowserRouter } from "react-router-dom";
 import Main from "../pages/main/index";
 import Signup from "../pages/signup/index";
 import KakaoRedirect from "../pages/kakaoRedirect";
@@ -7,33 +6,47 @@ import Start_restaurant from "../pages/restaurant/index";
 import Start_cafe from "../pages/cafe/index";
 import Start_fastfood from "../pages/fastfood/index";
 import Kiosk from "../pages/restaurant/description/kiosk";
+import KioskPractice from "../pages/restaurant/practice/kiosk.jsx";
 import MainHelp from "../pages/mainhelp";
 import CafeMenu from "../pages/cafe/practice/cafeMenu.jsx";
 import CafeMenuCommon from "../pages/cafe/description/cafeMenuCommon.jsx";
 import CompleteScreen from "../pages/cafe/description/completeScreen.jsx";
 import FinishRestaurant from "../pages/restaurant/description/finish.jsx";
+import Practice from "../pages/main/practice.jsx";
+import Question from "../pages/restaurant/practice/question.jsx";
+import Complete from "../pages/restaurant/practice/complete.jsx";
+import Failed from "../pages/restaurant/practice/failed.jsx";
 import TutorialDescription from "../pages/helper/tutorial/tutorial.jsx";
 import Tutorial from "../pages/helper/tutorial/index.jsx";
 import Helper from "../pages/helper/index.jsx";
 import Video from "../pages/helper/video/index.jsx";
 import Loading from "../pages/helper/video/loading.jsx";
 
-export const routes = createBrowserRouter([
+
+const routes = [
   {
     path: "/",
-    element: <Main />,
+    component: Main,
+    headerOptions: { headerShown: false },
   },
   {
     path: "/help",
-    element: <MainHelp />,
+    component: MainHelp,
+    headerOptions: {
+      title: "도움 전달",
+      showBackButton: true,
+      headerShown: true,
+    },
   },
   {
     path: "/signup",
-    element: <Signup />,
+    component: Signup,
+    headerOptions: { headerShown: false },
   },
   {
     path: "/oauth",
-    element: <KakaoRedirect />,
+    component: KakaoRedirect,
+    headerOptions: { headerShown: false },
   },
   /* 학습도우미 */
   {
@@ -59,42 +72,103 @@ export const routes = createBrowserRouter([
   /* 설명하기 */
   {
     path: "/description",
-    element: <Description />,
+    component: Description,
+    headerOptions: {
+      title: "설명 보기",
+      showBackButton: true,
+      headerShown: true,
+    },
   },
   {
     path: "/description/restaurant",
-    element: <Start_restaurant />,
+    component: Start_restaurant,
+    headerOptions: {
+      title: "설명 보기",
+      showBackButton: true,
+      headerShown: true,
+    },
   },
   {
     path: "/description/cafe",
-    element: <Start_cafe />,
+    component: Start_cafe,
+    headerOptions: {
+      title: "설명 보기",
+      showBackButton: true,
+      headerShown: true,
+    },
   },
   {
     path: "/description/cafe/menu",
-    element: <CafeMenuCommon />,
+    component: CafeMenuCommon,
+    headerOptions: { headerShown: false },
+
   },
   {
     path: "/description/cafe/complete",
-    element: <CompleteScreen />,
+    component: CompleteScreen,
+    headerOptions: { headerShown: false },
   },
   {
     path: "/description/fastfood",
-    element: <Start_fastfood />,
+    component: Start_fastfood,
+    headerOptions: {
+      title: "설명 보기",
+      showBackButton: true,
+      headerShown: true,
+    },
   },
   {
     path: "/description/restaurant/main",
-    element: <Kiosk />,
+    component: Kiosk,
+    headerOptions: { headerShown: false },
   },
   {
     path: "/description/restaurant/complete",
-    element: <FinishRestaurant />,
+    component: FinishRestaurant,
+    headerOptions: { headerShown: false },
   },
+  {
+    path: "/practice",
+    component: Practice,
+    headerOptions: {
+      title: "실습하기",
+      showBackButton: true,
+      headerShown: true,
+    },
+  },
+  {
+    path: "/practice/restaurant",
+    component: Question,
+    headerOptions: {
+      title: "실습하기",
+      showBackButton: true,
+      headerShown: true,
+    },
+  },
+  {
+    path: "/practice/restaurant/1",
+    component: KioskPractice,
+    headerOptions: { headerShown: false },
+  },
+  {
+    path: "/practice/complete",
+    component: Complete,
+    headerOptions: { headerShown: false },
+  },
+  {
+    path: "/practice/failed",
+    component: Failed,
+    headerOptions: { headerShown: false },
+  },
+];
+
 
   /* 실습하기 */
   {
     path: "/practice/cafe/menu",
-    element: <CafeMenu />,
+    component: CafeMenu ,
   },
 ]);
+
 
 export default routes;

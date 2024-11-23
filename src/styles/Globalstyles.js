@@ -30,7 +30,6 @@ const GlobalStyles = createGlobalStyle`
     overflow-x: hidden; 
     background-color: #fff; 
   }
-
   input, ::placeholder, textarea {
     font-family: 'Pretendard';
   }

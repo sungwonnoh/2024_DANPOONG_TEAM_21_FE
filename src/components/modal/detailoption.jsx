@@ -158,6 +158,7 @@ export default function DetailOption({ isOpen, onClose, menu, onAddToCart }) {
         style={{
           overlay: {
             backgroundColor: "rgba(0, 0, 0, 0.6)",
+            zIndex: 500,
           },
           content: {
             width: "600px",

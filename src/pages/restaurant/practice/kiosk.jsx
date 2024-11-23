@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import theme from "../../../styles/theme";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import fish from "../../../assets/images/restaurant/fish.png";
 import Gultangmyeon from "../../../assets/images/restaurant/Gultangmyeon.png";
 import sweetPotato from "../../../assets/images/restaurant/sweetPotato.png";
@@ -9,6 +9,14 @@ import { useNavigate, useParams } from "react-router-dom";
 import DetailOption from "../../../components/modal/detailoption";
 import AddToCartModal from "../../../components/modal/addToCartModal";
 import ShoppingCart from "../../../components/shoppingcart";
+import {
+  ClosePractice,
+  ShowDescription,
+  ShowPractice,
+  WordBtn,
+} from "../../../components/practiceBtn";
+import CloseModal from "../../../components/modal/closeModal";
+import ShowPracticeModal from "../../../components/modal/showPracticeModal";
 
 const Wrapper = styled.div`
   display: flex;
@@ -111,9 +119,9 @@ const BtnContainer = styled.div`
   left: 16px;
   display: flex;
   gap: 8px;
-  z-index: 999;
+  z-index: 900;
 `;
-export default function Kiosk() {
+export default function Practice() {
   const sideItems = ["런치세트", "시즌메뉴", "메인", "사이드"];
   const MenuItems = [
     { title: "방어 사시미", price: "40,000원", image: fish },
@@ -128,6 +136,8 @@ export default function Kiosk() {
   const [showAddedModal, setShowAddedModal] = useState(false); // Alert modal
   const { option } = useParams();
   const [selectedOption, setSelectedOption] = useState(option || "시즌메뉴");
+  const [isCloseModalOpen, setIsCloseModalOpen] = useState(false);
+  const [isShowPractice, setIsShowPractice] = useState(false);
   const navigate = useNavigate();
 
   const handleClick = (item) => {
@@ -139,10 +149,17 @@ export default function Kiosk() {
     setSelectedMenu(menu);
     setIsModalOpen(true);
   };
-
+  const handleOpenModal = () => {
+    setIsCloseModalOpen(true); // 모달 열기
+  };
+  const handleShowModal = () => {
+    setIsShowPractice(true);
+  };
   const handleCloseModal = () => {
     setSelectedMenu(null);
     setIsModalOpen(false);
+    setIsCloseModalOpen(false);
+    setIsShowPractice(false);
   };
 
   const handleAddToCart = (item) => {
@@ -161,66 +178,6 @@ export default function Kiosk() {
     }, 3300);
   };
 
-  const [level, setLevel] = useState(0);
-  const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
-  const [isShoppingModalOpen, setIsShoppingModalOpen] = useState(false);
-  const [isOrderModalOpen, setIsOrderModalOpen] = useState(false);
-  const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
-  useEffect(() => {
-    switch (level) {
-      case 0:
-        setIsDetailModalOpen(false);
-        setIsShoppingModalOpen(false);
-        setIsOrderModalOpen(false);
-        setIsPaymentModalOpen(false);
-        break;
-      case 1:
-        break;
-      case 2:
-        break;
-      case 3:
-        setIsDetailModalOpen(true);
-        setIsShoppingModalOpen(false);
-        setIsOrderModalOpen(false);
-        setIsPaymentModalOpen(false);
-        break;
-      case 4:
-        break;
-      case 5:
-        break;
-      case 6:
-        setIsDetailModalOpen(false);
-        setIsShoppingModalOpen(true);
-        setIsOrderModalOpen(false);
-        setIsPaymentModalOpen(false);
-        break;
-      case 7:
-        break;
-      case 8:
-        break;
-      case 13:
-        setIsDetailModalOpen(false);
-        setIsShoppingModalOpen(false);
-        setIsOrderModalOpen(true);
-        setIsPaymentModalOpen(false);
-        break;
-      case 14:
-        setIsDetailModalOpen(false);
-        setIsShoppingModalOpen(false);
-        setIsOrderModalOpen(false);
-        setIsPaymentModalOpen(true);
-        navigate("/description/restaurant/complete");
-      default:
-        break;
-    }
-  }, [level]);
-  const handleNext = () => {
-    setLevel((prev) => Math.min(prev + 1, level.length - 1));
-  };
-
-  const handlePrev = () => {
-    setLevel((prev) => Math.max(prev - 1, 0));
-  };
   return (
     <Wrapper>
       {/* Header */}
@@ -258,8 +215,12 @@ export default function Kiosk() {
 
       {/* Navigation Buttons */}
       <BtnContainer>
-        <PrevBtn onClick={handlePrev} disabled={level === 0} />
-        <NextBtn onClick={handleNext} disabled={level === level.length - 1} />
+        <ShowPractice onClick={handleShowModal} />
+        <WordBtn />
+        <ShowDescription
+          onClick={() => navigate("/description/restaurant/main")}
+        />
+        <ClosePractice onClick={handleOpenModal} />
       </BtnContainer>
 
       {/* Modals */}
@@ -282,6 +243,8 @@ export default function Kiosk() {
           setCartItems={setCartItems}
         />
       )}
+      <ShowPracticeModal isOpen={isShowPractice} onClose={handleCloseModal} />
+      <CloseModal isOpen={isCloseModalOpen} onClose={handleCloseModal} />
     </Wrapper>
   );
 }

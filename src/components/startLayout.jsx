@@ -6,7 +6,7 @@ export const Wrapper = styled.div`
   flex-direction: column;
   justify-content: space-between;
   //padding: 20px;
-  margin-top: 54px;
+  margin-top: 40px;
   height: 90vh;
   overflow: hidden;
 `;

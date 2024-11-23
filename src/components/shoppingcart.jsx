@@ -3,6 +3,7 @@ import styled from "styled-components";
 import theme from "../styles/theme";
 import OrderModal from "./modal/orderModal";
 import PaymentModal from "./modal/paymentModal";
+import { useNavigate } from "react-router-dom";
 
 const Wrapper = styled.div`
   display: flex;
@@ -183,16 +184,16 @@ export default function ShoppingCart({
   );
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
-
+  const navigate = useNavigate();
   const handleOrderClick = () => {
     setIsModalOpen(true); // 주문 확인 모달 열기
   };
 
   const handlePaymentCompletion = () => {
-    alert("결제가 완료되었습니다!");
     setIsPaymentModalOpen(false); // 결제 모달 닫기
     onClose(); // 장바구니 닫기
     setCartItems([]); // 장바구니 비우기
+    navigate("/practice/complete");
   };
 
   const increaseQuantity = (index) => {

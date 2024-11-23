@@ -2,6 +2,7 @@ import styled from "styled-components";
 import theme from "../../../styles/theme";
 import completeIcon from "../../cafe/assets/completeIcon.svg";
 import { PrevBtn } from "../../../components/stepBtn";
+import { useNavigate } from "react-router-dom";
 
 const Wrapper = styled.div`
   display: flex;
@@ -71,6 +72,7 @@ const BtnContainer = styled.div`
 `;
 
 export default function FinishRestaurant() {
+  const navigate = useNavigate();
   return (
     <>
       <Wrapper>
@@ -79,7 +81,9 @@ export default function FinishRestaurant() {
           <Alert>주문이 완료되었습니다</Alert>
           <Img src={completeIcon} alt="완료 아이콘" />
           <Button>
-            <OtherBtn>다른 업종 설명 보기</OtherBtn>
+            <OtherBtn onClick={() => navigate("/description")}>
+              다른 업종 설명 보기
+            </OtherBtn>
             <Trypractice>실습 도전하기</Trypractice>
           </Button>
         </Container>

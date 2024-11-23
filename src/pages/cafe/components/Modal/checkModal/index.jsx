@@ -1,17 +1,22 @@
 import PropTypes from "prop-types";
 import * as S from "./checkModal.style";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
-export default function CheckModal({ isOpen, onClose, cart }) {
+export default function CheckModal({ isOpen, onClose, cart, onMenuClick }) {
   const handleBackgroundClick = (e) => {
-    if (e.target === e.currentTarget) {
+    if (
+      e.target === e.currentTarget &&
+      location.pathname === "/practice/cafe/menu"
+    ) {
       onClose();
     }
   };
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleComplete = () => {
-    navigate("/description/cafe/complete");
+    if (location.pathname === "/practice/cafe/menu")
+      navigate("/description/cafe/complete");
   };
   if (!isOpen) return null;
   return (
@@ -42,8 +47,24 @@ export default function CheckModal({ isOpen, onClose, cart }) {
             })}
         </S.Bottom>
         <S.BtnBox>
-          <button onClick={onClose}>돌아가기</button>
-          <button onClick={handleComplete}>카드 결제하기</button>
+          <button
+            onClick={(e) => {
+              if (location.pathname === "/description/cafe/menu")
+                onMenuClick(9, true, e);
+              if (location.pathname === "/practice/cafe/menu") onClose();
+            }}
+          >
+            돌아가기
+          </button>
+          <button
+            onClick={(e) => {
+              if (location.pathname === "/description/cafe/menu")
+                onMenuClick(8, true, e);
+              if (location.pathname === "/practice/cafe/menu") handleComplete();
+            }}
+          >
+            카드 결제하기
+          </button>
         </S.BtnBox>
       </S.Container>
     </S.App>

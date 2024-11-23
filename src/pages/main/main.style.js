@@ -1,8 +1,19 @@
 import styled from "styled-components";
 import theme from "../../styles/theme";
 
+export const App = styled.div`
+  width: 100%;
+  height: 100dvh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
 export const Container = styled.div`
   width: 100%;
+  max-width: 400px;
   height: 100dvh;
 
   display: flex;
@@ -14,8 +25,7 @@ export const Container = styled.div`
 export const Title = styled.img`
   width: 60%;
   align-self: flex-start;
-  margin-left: 31px;
-  margin-bottom: 4%;
+  margin: 20% 0 4% 32px;
 `;
 
 export const Info = styled.div`

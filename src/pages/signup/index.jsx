@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 import * as S from "./signup.style";
 import logo from "../../assets/logo.png";
 import Splash from "./components/splash";
+import { useNavigate } from "react-router-dom";
 
 export default function Signup() {
   const [isSplash, setIsSplash] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setTimeout(() => {
@@ -12,7 +14,7 @@ export default function Signup() {
     }, 2000);
   });
   return (
-    <>
+    <S.App>
       {isSplash ? (
         <Splash />
       ) : (
@@ -25,10 +27,10 @@ export default function Signup() {
           </S.Top>
           <S.BtnBox>
             <button />
-            <button>도움 전달하기</button>
+            <button onClick={() => navigate("/help")}>도움 전달하기</button>
           </S.BtnBox>
         </S.Container>
       )}
-    </>
+    </S.App>
   );
 }

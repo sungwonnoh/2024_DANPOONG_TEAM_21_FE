@@ -15,6 +15,8 @@ import FinishRestaurant from "../pages/restaurant/description/finish.jsx";
 import TutorialDescription from "../pages/helper/tutorial/tutorial.jsx";
 import Tutorial from "../pages/helper/tutorial/index.jsx";
 import Helper from "../pages/helper/index.jsx";
+import Video from "../pages/helper/video/index.jsx";
+import Loading from "../pages/helper/video/loading.jsx";
 
 export const routes = createBrowserRouter([
   {
@@ -45,6 +47,14 @@ export const routes = createBrowserRouter([
   {
     path: "/helper/tutorial/:id",
     element: <TutorialDescription />,
+  },
+  {
+    path: "/helper/video",
+    element: <Video />,
+  },
+  {
+    path: "/helper/video/loading",
+    element: <Loading />,
   },
   /* 설명하기 */
   {

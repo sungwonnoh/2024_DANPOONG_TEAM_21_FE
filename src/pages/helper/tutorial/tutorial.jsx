@@ -16,7 +16,7 @@ export default function TutorialDescription() {
 
   const navigate = useNavigate();
   const handlePlusLevel = () => {
-    setLevel((prev) => Math.min(prev + 1, 5)); // 최대값 제한
+    setLevel((prev) => Math.min(prev + 1, imageData.length)); // 최대값 제한
   };
 
   const handleMinusLevel = () => {
@@ -48,11 +48,11 @@ export default function TutorialDescription() {
               backgroundColor: level === 5 && theme.color.main,
             }}
             onClick={() => {
-              if (level === 5) navigate(`/${type}`);
+              if (level === imageData.length - 1) navigate(`/${type}`);
               else handlePlusLevel();
             }}
           >
-            <p>{level === 5 ? buttonData : "다음으로"}</p>
+            <p>{level === imageData.length - 1 ? buttonData : "다음으로"}</p>
             <img src={nextIcon} />
           </button>
         </S.NavigateBar>

@@ -18,10 +18,8 @@ export const Container = styled.div`
 
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
-
-  border: 4px lightgray solid;
 `;
 
 export const Top = styled.div`
@@ -36,10 +34,20 @@ export const Top = styled.div`
 
   p {
     color: ${theme.color.gray1};
-    font-size: 11px;
+    font-size: 15px;
   }
 
   h2 {
+    font-family: "Pretendard";
+    font-style: bold;
+    font-weight: 700;
+    font-size: 21px;
+    line-height: 27px;
+
+    color: ${theme.color.black};
+  }
+
+  h3 {
     font-family: "Pretendard";
     font-style: bold;
     font-weight: 700;
@@ -51,7 +59,7 @@ export const Top = styled.div`
 `;
 
 export const Image = styled.img`
-  width: 50%;
+  width: 40%;
   // margin-top: dvh;
 `;
 
@@ -114,14 +122,14 @@ export const NavigateBar = styled.div`
     text-align: center;
 
     font-weight: 600;
-    font-size: 1rem;
+    font-size: 15px;
 
     line-height: 11px;
 
     cursor: pointer;
 
     &:first-child {
-      width: 28%;
+      width: 32%;
 
       background-color: ${theme.color.gray2};
       color: ${theme.color.gray1};
@@ -134,6 +142,9 @@ export const NavigateBar = styled.div`
 
     img {
       width: 21px;
+    }
+    p {
+      width: 100%;
     }
   }
   z-index: 7000;

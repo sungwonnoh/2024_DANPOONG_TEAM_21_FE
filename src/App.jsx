@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter } from "react-router-dom";
-import GlobalStyles from "./styles/GlobalStyles.js";
+import GlobalStyles from "./styles/GlobalStyles";
 import CustomNavigator from "./navigator/CustomNavigator";
 import routes from "./navigator/routes";
 

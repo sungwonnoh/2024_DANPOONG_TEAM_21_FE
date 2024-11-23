@@ -1,5 +1,5 @@
 import * as S from "./completeScreen.style.js";
-import completeIcon from "./assets/completeIcon.svg";
+import completeIcon from "../assets/completeIcon.svg";
 import { useNavigate } from "react-router-dom";
 export default function CompleteScreen() {
   const navigate = useNavigate();

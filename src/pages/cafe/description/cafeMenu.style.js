@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import theme from "../../styles/theme.js";
+import theme from "../../../styles/theme";
 
 export const App = styled.div`
   width: 100%;
@@ -292,6 +292,9 @@ export const NavigateBar = styled.div`
 
     font-weight: 600;
     font-size: 1rem;
+    @media (max-width: 500px) {
+      font-size: 0.75rem;
+    }
     line-height: 11px;
 
     color: ${theme.color.white};
@@ -303,4 +306,5 @@ export const NavigateBar = styled.div`
       background-color: ${theme.color.main};
     }
   }
+  z-index: 7000;
 `;

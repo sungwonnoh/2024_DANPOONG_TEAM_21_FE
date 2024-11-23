@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import theme from "../../styles/theme";
+import theme from "../../../styles/theme";
 import { motion } from "framer-motion";
 
 export const App = styled.div`
@@ -90,6 +90,9 @@ export const BtnBox = styled.div`
 
     color: ${theme.color.white};
     font-size: 1.5rem;
+    @media (max-width: 500px) {
+      font-size: 1rem;
+    }
     font-weight: 700;
 
     &:first-child {

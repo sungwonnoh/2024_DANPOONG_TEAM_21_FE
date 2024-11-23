@@ -53,7 +53,7 @@ export const Header = styled.div`
 export const Bottom = styled.div`
   width: 100%;
   height: 60dvh;
-  border: 2px red solid;
+  // border: 2px red solid;
 
   display: flex;
   flex-direction: column;
@@ -127,6 +127,9 @@ export const BtnBox = styled.div`
 
     color: ${theme.color.white};
     font-size: 1.5rem;
+    @media (max-width: 500px) {
+      font-size: 1rem;
+    }
     font-weight: 700;
 
     &:first-child {

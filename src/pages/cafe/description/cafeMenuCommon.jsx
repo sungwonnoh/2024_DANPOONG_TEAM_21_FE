@@ -1,10 +1,10 @@
-import * as S from "../../description/cafeMenu.style";
-import exitIcon from "../../assets/exitIcon.svg";
+import * as S from "../practice/cafeMenu.style";
+import exitIcon from "../assets/exitIcon.svg";
 import { useEffect, useRef, useState } from "react";
-import { cafe, beverageOptions } from "../../../../datas/cafe";
-import OptionModal from "../Modal/optionModal";
+import { cafe, beverageOptions } from "../../../datas/cafe";
+import OptionModal from "../components/Modal/optionModal";
 import { useNavigate } from "react-router-dom";
-import CheckModal from "../Modal/checkModal";
+import CheckModal from "../components/Modal/checkModal";
 
 export default function CafeMenuCommon() {
   const navigate = useNavigate();

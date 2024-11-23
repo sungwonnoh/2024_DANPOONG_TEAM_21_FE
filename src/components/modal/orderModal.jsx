@@ -9,7 +9,6 @@ const Wrapper = styled.div`
   flex-direction: column;
   width: 100%;
   height: 100%;
-  z-index: 10;
   padding: 16px;
   justify-content: center;
   align-items: center;
@@ -60,6 +59,7 @@ export default function OrderModal({ isOpen, onClose, onOrder }) {
         style={{
           overlay: {
             backgroundColor: "rgba(0, 0, 0, 0.6)",
+            zIndex: 100,
           },
           content: {
             width: "600px",

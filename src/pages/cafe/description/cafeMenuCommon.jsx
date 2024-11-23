@@ -9,6 +9,9 @@ import ExplainModal from "../components/Modal/explainModal";
 import info from "../../../datas/popupInfo.jsx";
 
 import theme from "../../../styles/theme.js";
+import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { setMenu } from "../../../store/menu.js";
 
 export default function CafeMenuCommon() {
   const navigate = useNavigate();
@@ -111,6 +114,20 @@ export default function CafeMenuCommon() {
     setLevel((prev) => Math.max(prev - 1, 0)); // 최소값 제한
   };
 
+  /* 서버로부터 데이터 가져옴 */
+  const menuData = useSelector((state) => state.menu);
+  const dispatch = useDispatch();
+
+  const getMenus = async () => {
+    const res = await axios.get(`/api/v1/stores/2/menus?mode=explain`);
+    const data = res.data.data;
+    console.log("getMenus: ", res.data);
+    dispatch(setMenu(data));
+  };
+
+  useEffect(() => {
+    getMenus();
+  }, []);
   return (
     <>
       <S.App>
@@ -133,6 +150,10 @@ export default function CafeMenuCommon() {
           </S.Header>
           <S.MenuBox>
             {cafeData.map((value, index) => {
+              {
+                /* {menu.menus.map((value, index) => { */
+                // 서버 연결 시 이거로 변경
+              }
               return (
                 <S.Menu
                   key={index}

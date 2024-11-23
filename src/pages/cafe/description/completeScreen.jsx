@@ -22,7 +22,7 @@ export default function CompleteScreen() {
         </button>
         <button onClick={() => navigate("/practice")}>실습 도전하기</button>
       </S.BtnBox>
-      <S.PrevBtn onClick={() => navigate(-1)}>이전 단계로</S.PrevBtn>
+      <S.PrevBtn onClick={() => navigate("/")}>이전 단계로</S.PrevBtn>
     </S.CompleteContainer>
   );
 }

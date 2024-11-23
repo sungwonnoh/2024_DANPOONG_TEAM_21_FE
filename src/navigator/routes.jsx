@@ -8,6 +8,7 @@ import Start_cafe from "../pages/cafe/index";
 import Start_fastfood from "../pages/fastfood/index";
 import MainHelp from "../pages/mainhelp";
 import CafeMenu from "../pages/cafe/cafeMenu.jsx";
+import CompleteScreen from "../pages/cafe/CompleteScreen.jsx";
 
 export const routes = createBrowserRouter([
   {
@@ -41,6 +42,10 @@ export const routes = createBrowserRouter([
   {
     path: "/description/cafe/menu",
     element: <CafeMenu />,
+  },
+  {
+    path: "/description/cafe/complete",
+    element: <CompleteScreen />,
   },
   {
     path: "/description/fastfood",

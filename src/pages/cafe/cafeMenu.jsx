@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { cafe, beverageOptions, dessertOptions } from "../../datas/cafe";
 import OptionModal from "./components/Modal/optionModal";
 import { useNavigate } from "react-router-dom";
+import CheckModal from "./components/Modal/checkModal";
 export default function CafeMenu() {
   const [choice, setChoice] = useState("coffee");
   const cafeData = useRef(cafe.coffee);
@@ -15,6 +16,7 @@ export default function CafeMenu() {
   const [cart, setCart] = useState([]);
 
   const [isOptionModalOpen, setIsOptionModalOpen] = useState(false);
+  const [isCheckModalOpen, setIsCheckModalOpen] = useState(false);
 
   const navigate = useNavigate();
 
@@ -43,7 +45,7 @@ export default function CafeMenu() {
     setSelectedOptions((prevOptions) => [...prevOptions, option]);
   };
 
-  // modal open
+  // optionmodal open
   const handleOptionOpen = (value) => {
     setIsOptionModalOpen(true);
     setMenu(value);
@@ -55,10 +57,17 @@ export default function CafeMenu() {
     }
   };
 
-  // modal close
+  // option modal close
   const handleOptionClose = () => {
     setIsOptionModalOpen(false);
     setChoice(choice);
+  };
+
+  const handleCheckOpen = () => {
+    setIsCheckModalOpen(true);
+  };
+  const handleCheckClose = () => {
+    setIsCheckModalOpen(false);
   };
   useEffect(() => {
     const id = setInterval(() => {
@@ -76,6 +85,9 @@ export default function CafeMenu() {
     console.log(cart);
   }, [cart]);
 
+  useEffect(() => {
+    setTime(120);
+  }, [isOptionModalOpen]);
   return (
     <>
       <S.App>
@@ -158,7 +170,7 @@ export default function CafeMenu() {
                   <p>{time}초</p>
                 </div>
               </S.Top>
-              <S.PayBtn>결제하기</S.PayBtn>
+              <S.PayBtn onClick={handleCheckOpen}>결제하기</S.PayBtn>
             </S.Right>
           </S.PaymentBox>
           <S.NavigateBar>
@@ -175,6 +187,11 @@ export default function CafeMenu() {
         onClose={handleOptionClose}
         onOptionSelect={handleOptionSelect}
         setCart={setCart}
+      />
+      <CheckModal
+        isOpen={isCheckModalOpen}
+        onClose={handleCheckClose}
+        cart={cart}
       />
     </>
   );

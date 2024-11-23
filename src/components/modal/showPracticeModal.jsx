@@ -2,6 +2,7 @@ import Modal from "react-modal";
 import styled from "styled-components";
 import theme from "../../styles/theme";
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 Modal.setAppElement("#root");
 
 const Wrapper = styled.div`
@@ -64,6 +65,7 @@ const ShareBtn = styled.button`
 
 export default function ShowPracticeModal({ isOpen, onClose, problem }) {
   const navigate = useNavigate();
+
   return (
     <>
       <Modal

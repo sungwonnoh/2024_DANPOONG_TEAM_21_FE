@@ -1,11 +1,12 @@
 import styled from "styled-components";
 import theme from "../../styles/theme";
 import enter_restaurant from "../../assets/images/enter_restaurant.svg";
+import { useNavigate } from "react-router-dom";
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-
+  align-items: center;
   //padding: 20px;
   margin-top: 54px;
   height: 90vh;
@@ -45,12 +46,15 @@ const Button = styled.div`
   background-color: ${theme.color.main};
   color: ${theme.color.white};
   padding: 10px;
+  margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: center;
 `;
 
 export default function Start_restaurant() {
+  const navigate = useNavigate();
+
   return (
     <Wrapper>
       <Container>
@@ -61,7 +65,9 @@ export default function Start_restaurant() {
       <ImgContainer>
         <Img src={enter_restaurant} alt="음식점 진입" />
       </ImgContainer>
-      <Button>시작하기</Button>
+      <Button onClick={() => navigate("/description/restaurant/main")}>
+        시작하기
+      </Button>
     </Wrapper>
   );
 }

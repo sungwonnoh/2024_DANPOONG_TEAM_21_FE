@@ -22,7 +22,6 @@ import Helper from "../pages/helper/index.jsx";
 import Video from "../pages/helper/video/index.jsx";
 import Loading from "../pages/helper/video/loading.jsx";
 
-
 const routes = [
   {
     path: "/",
@@ -101,7 +100,6 @@ const routes = [
     path: "/description/cafe/menu",
     component: CafeMenuCommon,
     headerOptions: { headerShown: false },
-
   },
   {
     path: "/description/cafe/complete",
@@ -160,15 +158,11 @@ const routes = [
     component: Failed,
     headerOptions: { headerShown: false },
   },
-];
-
-
   /* 실습하기 */
   {
     path: "/practice/cafe/menu",
-    component: CafeMenu ,
+    component: CafeMenu,
   },
-]);
-
+];
 
 export default routes;

@@ -125,9 +125,9 @@ export default function Kiosk() {
   const [cartItems, setCartItems] = useState([]); // Cart state
   const [isCartVisible, setIsCartVisible] = useState(false); // Cart visibility
   const [showAddedModal, setShowAddedModal] = useState(false); // Alert modal
+
   const navigate = useNavigate();
   const location = useLocation();
-
   const queryParams = new URLSearchParams(location.search);
   const selectedOption = queryParams.get("option");
 
@@ -146,14 +146,19 @@ export default function Kiosk() {
   };
 
   const handleAddToCart = (item) => {
-    setCartItems((prev) => [...prev, item]); // Add item to cart
-    setIsModalOpen(false); // Close the option modal
-    setShowAddedModal(true); // Show alert modal
-    setIsCartVisible(true); // Open cart
+    setCartItems((prev) => [...prev, item]); // 1. 장바구니에 아이템 추가
+    setIsModalOpen(false); // 2. 옵션 모달 닫기
 
+    // 3. 모달 닫은 후 짧은 딜레이로 장바구니와 알림 모달 처리
     setTimeout(() => {
-      setShowAddedModal(false); // Hide alert modal after 3 seconds
-    }, 3000);
+      setShowAddedModal(true); // 알림 모달 표시
+      setIsCartVisible(true); // 장바구니 표시
+    }, 300);
+
+    // 4. 알림 모달 3초 후 닫기
+    setTimeout(() => {
+      setShowAddedModal(false);
+    }, 3300);
   };
 
   return (
@@ -202,7 +207,7 @@ export default function Kiosk() {
         isOpen={isModalOpen}
         onClose={handleCloseModal}
         menu={selectedMenu}
-        onAddToCart={handleAddToCart} // Pass add-to-cart handler
+        onAddToCart={handleAddToCart}
       />
 
       {/* 추가된 알림 모달 */}
@@ -214,7 +219,7 @@ export default function Kiosk() {
           isOpen={isCartVisible}
           onClose={() => setIsCartVisible(false)}
           cartItems={cartItems}
-          total={total}
+          //total={total}
         />
       )}
     </Wrapper>

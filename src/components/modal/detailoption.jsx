@@ -108,7 +108,7 @@ const Button = styled.div`
   border-radius: 8px;
 `;
 
-export default function DetailOption({ isOpen, onClose, menu }) {
+export default function DetailOption({ isOpen, onClose, menu, onAddToCart }) {
   const [essential, setEssential] = useState("");
   const [extras, setExtras] = useState({
     option1: false,
@@ -131,10 +131,13 @@ export default function DetailOption({ isOpen, onClose, menu }) {
     }));
   };
   const handleAddToCart = () => {
-    // 장바구니에 추가할 항목 생성
+    if (!onAddToCart) {
+      console.error("onAddToCart 함수가 전달되지 않았습니다.");
+      return;
+    }
     const newItem = {
       name: menu.title,
-      price: parseInt(menu.price.replace(/,/g, "")), // 숫자 변환
+      price: parseInt(menu.price.replace(/,/g, "")), // 숫자로 변환
       quantity: 1,
       options: [
         `맵기: ${essential}`,
@@ -143,23 +146,8 @@ export default function DetailOption({ isOpen, onClose, menu }) {
       ].filter(Boolean),
     };
 
-    // 장바구니 상태 업데이트
-    setCartItems((prev) => [...prev, newItem]);
-    setTotal((prev) => prev + newItem.price);
-
-    // 첫 번째 모달 닫기
-    onClose();
-
-    // 첫 번째 모달 닫힌 후 알림 모달 띄우기
-    setTimeout(() => {
-      setShowAddedModal(true); // 두 번째 모달 표시
-
-      // 3초 후 알림 모달 닫기
-      setTimeout(() => {
-        setShowAddedModal(false);
-        setIsCartVisible(true); // 장바구니 UI 표시
-      }, 3000);
-    }, 300); // 첫 번째 모달 닫히는 시간 후 실행
+    onAddToCart(newItem); // 부모 컴포넌트의 장바구니 핸들러 호출
+    onClose(); // 옵션 모달 닫기
   };
 
   if (!menu) return null;

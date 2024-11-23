@@ -1,11 +1,11 @@
 import styled from "styled-components";
 import theme from "../../../styles/theme";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import fish from "../../../assets/images/restaurant/fish.png";
 import Gultangmyeon from "../../../assets/images/restaurant/Gultangmyeon.png";
 import sweetPotato from "../../../assets/images/restaurant/sweetPotato.png";
 import { NextBtn, PrevBtn } from "../../../components/stepBtn";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import DetailOption from "../../../components/modal/detailoption";
 import AddToCartModal from "../../../components/modal/addToCartModal";
 import ShoppingCart from "../../../components/shoppingcart";
@@ -35,7 +35,7 @@ const TableNum = styled.div`
   margin-left: auto;
   align-items: center;
   justify-content: center;
-  z-index: 9999;
+  z-index: 10;
 `;
 const Body = styled.div`
   display: flex;
@@ -60,7 +60,7 @@ const Items = styled.div`
   height: 48px;
   border-radius: 8px;
   background-color: ${(props) =>
-    props.active ? theme.color.main : theme.color.ui_3};
+    props.active ? theme.color.ui_1 : theme.color.ui_3};
   color: ${theme.color.white};
   font-size: 17px;
   font-weight: 500;
@@ -68,6 +68,7 @@ const Items = styled.div`
   justify-content: center;
   align-items: center;
 `;
+
 const Container = styled.div`
   width: 80%;
   flex: 1;
@@ -124,7 +125,14 @@ export default function Kiosk() {
   const [cartItems, setCartItems] = useState([]); // Cart state
   const [isCartVisible, setIsCartVisible] = useState(false); // Cart visibility
   const [showAddedModal, setShowAddedModal] = useState(false); // Alert modal
+  const { option } = useParams();
+  const [selectedOption, setSelectedOption] = useState(option || "시즌메뉴");
+  const navigate = useNavigate();
 
+  const handleClick = (item) => {
+    setSelectedOption(item);
+    navigate(`/description/restaurant/main/?option=${item}`);
+  };
   // Handlers
   const handleMenuClick = (menu) => {
     setSelectedMenu(menu);
@@ -137,14 +145,19 @@ export default function Kiosk() {
   };
 
   const handleAddToCart = (item) => {
-    setCartItems((prev) => [...prev, item]); // Add item to cart
-    setIsModalOpen(false); // Close the option modal
-    setShowAddedModal(true); // Show alert modal
-    setIsCartVisible(true); // Open cart
+    setCartItems((prev) => [...prev, item]); // 1. 장바구니에 아이템 추가
+    setIsModalOpen(false); // 2. 옵션 모달 닫기
 
+    // 3. 모달 닫은 후 짧은 딜레이로 장바구니와 알림 모달 처리
     setTimeout(() => {
-      setShowAddedModal(false); // Hide alert modal after 3 seconds
-    }, 3000);
+      setShowAddedModal(true); // 알림 모달 표시
+      setIsCartVisible(true); // 장바구니 표시
+    }, 300);
+
+    // 4. 알림 모달 3초 후 닫기
+    setTimeout(() => {
+      setShowAddedModal(false);
+    }, 3300);
   };
 
   return (
@@ -159,7 +172,11 @@ export default function Kiosk() {
         <BlackSide />
         <Sidebar>
           {sideItems.map((item, index) => (
-            <Items key={index} active={false}>
+            <Items
+              key={index}
+              active={item === selectedOption}
+              onClick={() => handleClick(item)}
+            >
               {item}
             </Items>
           ))}
@@ -189,7 +206,7 @@ export default function Kiosk() {
         isOpen={isModalOpen}
         onClose={handleCloseModal}
         menu={selectedMenu}
-        onAddToCart={handleAddToCart} // Pass add-to-cart handler
+        onAddToCart={handleAddToCart}
       />
 
       {/* 추가된 알림 모달 */}
@@ -201,7 +218,7 @@ export default function Kiosk() {
           isOpen={isCartVisible}
           onClose={() => setIsCartVisible(false)}
           cartItems={cartItems}
-          total={total}
+          setCartItems={setCartItems}
         />
       )}
     </Wrapper>

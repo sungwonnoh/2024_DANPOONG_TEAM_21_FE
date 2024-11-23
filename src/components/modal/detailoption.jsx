@@ -2,8 +2,6 @@ import Modal from "react-modal";
 import { useState } from "react";
 import styled from "styled-components";
 import theme from "../../styles/theme";
-import AddToCartModal from "./addToCartModal";
-import ShoppingCart from "../shoppingcart";
 
 Modal.setAppElement("#root");
 
@@ -108,16 +106,12 @@ const Button = styled.div`
   border-radius: 8px;
 `;
 
-export default function DetailOption({ isOpen, onClose, menu }) {
+export default function DetailOption({ isOpen, onClose, menu, onAddToCart }) {
   const [essential, setEssential] = useState("");
   const [extras, setExtras] = useState({
     option1: false,
     option2: false,
   });
-  const [showAddedModal, setShowAddedModal] = useState(false);
-  const [isCartVisible, setIsCartVisible] = useState(false); // 장바구니 UI 상태
-  const [cartItems, setCartItems] = useState([]); // 장바구니 항목
-  const [total, setTotal] = useState(0); // 총 금액
 
   const handleEssentialChange = (value) => {
     setEssential(value);
@@ -131,35 +125,27 @@ export default function DetailOption({ isOpen, onClose, menu }) {
     }));
   };
   const handleAddToCart = () => {
-    // 장바구니에 추가할 항목 생성
+    if (!essential) {
+      alert("필수 옵션을 선택해주세요.");
+      return;
+    }
+    if (!onAddToCart) {
+      console.error("onAddToCart 함수가 전달되지 않았습니다.");
+      return;
+    }
     const newItem = {
       name: menu.title,
-      price: parseInt(menu.price.replace(/,/g, "")), // 숫자 변환
+      price: parseInt(menu.price.replace(/,/g, "")),
       quantity: 1,
       options: [
-        `맵기: ${essential}`,
-        extras.option1 ? "+ 면사리 (6,000원)" : "",
-        extras.option2 ? "+ 굴 50g (8,000원)" : "",
+        `맵기 선택: ${essential}`,
+        extras.option1 ? "추가 선택: + 면사리 (6,000원)" : "",
+        extras.option2 ? "추가 선택: + 굴 50g (8,000원)" : "",
       ].filter(Boolean),
     };
 
-    // 장바구니 상태 업데이트
-    setCartItems((prev) => [...prev, newItem]);
-    setTotal((prev) => prev + newItem.price);
-
-    // 첫 번째 모달 닫기
+    onAddToCart(newItem);
     onClose();
-
-    // 첫 번째 모달 닫힌 후 알림 모달 띄우기
-    setTimeout(() => {
-      setShowAddedModal(true); // 두 번째 모달 표시
-
-      // 3초 후 알림 모달 닫기
-      setTimeout(() => {
-        setShowAddedModal(false);
-        setIsCartVisible(true); // 장바구니 UI 표시
-      }, 3000);
-    }, 300); // 첫 번째 모달 닫히는 시간 후 실행
   };
 
   if (!menu) return null;
@@ -250,7 +236,9 @@ export default function DetailOption({ isOpen, onClose, menu }) {
           </ModalContent>
 
           <BtnContainer>
-            <Button onClick={handleAddToCart}>장바구니 담기</Button>
+            <Button onClick={handleAddToCart} disabled={!essential}>
+              장바구니 담기
+            </Button>
           </BtnContainer>
         </Wrapper>
       </Modal>

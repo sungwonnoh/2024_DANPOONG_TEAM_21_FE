@@ -59,6 +59,7 @@ export const Bottom = styled.div`
   flex-direction: column;
   // justify-content: center;
   align-items: flex-start;
+  gap: 1%;
 
   overflow-y: auto;
 
@@ -70,7 +71,6 @@ export const Bottom = styled.div`
     justify-content: center;
     align-items: center;
     background-color: ${theme.color.gray3};
-    border: 1px black solid;
   }
 
   h1,
@@ -90,7 +90,7 @@ export const Bottom = styled.div`
   }
 
   p {
-    width: 30%;
+    width: 50%;
     margin: 0 0 1vh 5vh;
     font-weight: 400;
     font-size: 15px;
@@ -104,7 +104,7 @@ export const Option = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 50%;
+  width: 100%;
   margin-bottom: 1vh;
 `;
 

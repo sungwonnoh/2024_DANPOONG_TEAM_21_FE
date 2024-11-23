@@ -12,12 +12,14 @@ import theme from "../../../styles/theme.js";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { setMenu } from "../../../store/menu.js";
+import { setOption } from "../../../store/option.js";
 
 export default function CafeMenuCommon() {
   const navigate = useNavigate();
   const location = useLocation(); // 현재 경로 가져오기
 
-  const optionData = useRef(beverageOptions);
+  const SERVER_URL = import.meta.env.VITE_APP_SERVER_URL;
+  // const optionData = useRef(beverageOptions);
 
   const menu = cafe.season[0];
   const cart = [
@@ -77,6 +79,7 @@ export default function CafeMenuCommon() {
   };
 
   const cafeData = cafe?.season;
+  const optionData = beverageOptions;
 
   useEffect(() => {
     switch (level) {
@@ -85,6 +88,7 @@ export default function CafeMenuCommon() {
         break;
       case 1:
         setIsOptionModalOpen(true);
+        // getOptions();
         setIsCheckModalOpen(false);
         break;
       case 2:
@@ -119,14 +123,25 @@ export default function CafeMenuCommon() {
   const dispatch = useDispatch();
 
   const getMenus = async () => {
-    const res = await axios.get(`/api/v1/stores/2/menus?mode=explain`);
+    const res = await axios.get(
+      `${SERVER_URL}/api/v1/stores/2/menus?mode=${"explain"}&category=${"시즌메뉴"}`
+    );
     const data = res.data.data;
     console.log("getMenus: ", res.data);
     dispatch(setMenu(data));
   };
+  // const getOptions = async () => {
+  //   const res = await axios.get(
+  //     `${SERVER_URL}/api/v1/stores/2/menus/14?mode=${"explain"}&category=${"시즌메뉴"}`
+  //   );
+  //   const data = res.data.data;
+  //   console.log("getOptions: ", res.data);
+  //   dispatch(setOption(data));
+  // };
 
   useEffect(() => {
     getMenus();
+    console.log(SERVER_URL);
   }, []);
   return (
     <>
@@ -149,11 +164,7 @@ export default function CafeMenuCommon() {
             </S.TabBar>
           </S.Header>
           <S.MenuBox>
-            {cafeData.map((value, index) => {
-              {
-                /* {menu.menus.map((value, index) => { */
-                // 서버 연결 시 이거로 변경
-              }
+            {menuData.menus.map((value, index) => {
               return (
                 <S.Menu
                   key={index}
@@ -162,8 +173,8 @@ export default function CafeMenuCommon() {
                     border: activeIndex === 0 && `3px ${theme.color.sub} solid`,
                   }}
                 >
-                  <img src={value.image} />
-                  <h1>{value.name}</h1>
+                  <img src={value.imageUrl} />
+                  <h1>{value.menuName}</h1>
                   <p>{value.price}원</p>
                 </S.Menu>
               );

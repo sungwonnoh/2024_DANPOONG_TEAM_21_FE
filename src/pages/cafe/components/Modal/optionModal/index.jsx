@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
 import theme from "../../../../../styles/theme";
+import { useSelector } from "react-redux";
 
 export default function OptionModal({
   menu,
@@ -17,6 +18,8 @@ export default function OptionModal({
 }) {
   const [selectedItems, setSelectedItems] = useState([]); // 선택된 옵션 상태를 배열로 관리
   const location = useLocation();
+
+  const option = useSelector((state) => state.option);
 
   const handleSelect = (option) => {
     if (location.pathname === "/practice/cafe/menu") {
@@ -71,7 +74,8 @@ export default function OptionModal({
           </section>
         </S.Title>
         <S.Bottom>
-          {optionData.current.map((value) => {
+          {optionData.map((value) => {
+            // {option.options.map((value) => {
             return (
               <>
                 <S.OptionBox key={value.option}>

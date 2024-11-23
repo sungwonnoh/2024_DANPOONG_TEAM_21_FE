@@ -39,11 +39,6 @@ export default defineConfig({
             purpose: "maskable",
           },
         ],
-          resolve: {
-    alias: {
-      '@styles': '/src/styles',
-    },
-  },
       },
 
       workbox: {

@@ -58,7 +58,7 @@ export const routes = createBrowserRouter([
     element: <Kiosk />,
   },
   {
-    path: "/practice/cafe",
+    path: "/practice/cafe/menu",
     element: <CafeMenu />,
   },
 ]);

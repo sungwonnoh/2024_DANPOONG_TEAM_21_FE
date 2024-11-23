@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import theme from "../../styles/theme";
 import enter_ from "../../assets/images/enter_.svg";
+import { useNavigate } from "react-router-dom";
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -51,6 +52,7 @@ const Button = styled.div`
 `;
 
 export default function Start_cafe() {
+  const navigate = useNavigate();
   return (
     <Wrapper>
       <Container>
@@ -60,7 +62,9 @@ export default function Start_cafe() {
       <ImgContainer>
         <Img src={enter_} alt="카페 진입" />
       </ImgContainer>
-      <Button>시작하기</Button>
+      <Button onClick={() => navigate("/description/cafe/menu")}>
+        시작하기
+      </Button>
     </Wrapper>
   );
 }

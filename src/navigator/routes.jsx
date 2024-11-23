@@ -21,6 +21,7 @@ import Tutorial from "../pages/helper/tutorial/index.jsx";
 import Helper from "../pages/helper/index.jsx";
 import Video from "../pages/helper/video/index.jsx";
 import Loading from "../pages/helper/video/loading.jsx";
+import Word from "../pages/word/index.jsx";
 
 const routes = [
   {
@@ -50,23 +51,44 @@ const routes = [
   /* 학습도우미 */
   {
     path: "/helper",
-    element: <Helper />,
+    component: Helper,
+    headerOptions: {
+      title: "학습 도우미",
+      showBackButton: true,
+      headerShown: true,
+    },
   },
   {
     path: "/helper/tutorial",
-    element: <Tutorial />,
+    component: Tutorial,
+    headerOptions: {
+      title: "학습 도우미",
+      showBackButton: true,
+      headerShown: true,
+    },
   },
   {
     path: "/helper/tutorial/:id",
-    element: <TutorialDescription />,
+    component: TutorialDescription,
+    headerOptions: {
+      title: "'설명 보기' 사용법",
+      showBackButton: true,
+      headerShown: true,
+    },
   },
   {
     path: "/helper/video",
-    element: <Video />,
+    component: Video,
+    headerOptions: {
+      title: "학습 도우미",
+      showBackButton: true,
+      headerShown: true,
+    },
   },
   {
     path: "/helper/video/loading",
-    element: <Loading />,
+    component: Loading,
+    headerOptions: { headerShown: false },
   },
   /* 설명하기 */
   {
@@ -162,6 +184,17 @@ const routes = [
   {
     path: "/practice/cafe/menu",
     component: CafeMenu,
+    headerOptions: { headerShown: false },
+  },
+  /* 단어장 */
+  {
+    path: "/word",
+    component: Word,
+    headerOptions: {
+      title: "무인결제기 단어장",
+      showBackButton: true,
+      headerShown: true,
+    },
   },
 ];
 

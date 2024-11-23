@@ -14,7 +14,7 @@ export const App = styled.div`
 
 export const Container = styled.div`
   width: 100%;
-  max-width: 400px;
+  max-width: 768px;
   height: 100dvh;
 
   background-color: ${theme.color.main};

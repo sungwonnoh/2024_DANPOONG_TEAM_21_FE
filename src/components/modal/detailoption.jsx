@@ -2,6 +2,8 @@ import Modal from "react-modal";
 import { useState } from "react";
 import styled from "styled-components";
 import theme from "../../styles/theme";
+import AddToCartModal from "./addToCartModal";
+import ShoppingCart from "../shoppingcart";
 
 Modal.setAppElement("#root");
 
@@ -9,54 +11,63 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   background-color: ${theme.color.white};
-  //border: 1px solid ${theme.color.gray2};
   position: relative;
   padding: 16px;
 `;
+
 const ModalContent = styled.div`
   display: flex;
   flex-direction: row;
   gap: 16px;
 `;
+
 const ModalLeft = styled.div`
   display: flex;
   flex-direction: column;
   margin: 4px;
   gap: 16px;
 `;
+
 const Img = styled.img`
   width: 181px;
   height: 181px;
   border-radius: 8px;
 `;
+
 const MenuItems = styled.div`
   text-align: center;
 `;
+
 const Title = styled.div`
   font-size: 17px;
   font-weight: 500;
   margin: 4px;
 `;
+
 const Price = styled.div`
   font-size: 17px;
   font-weight: 600;
 `;
+
 const OptionContainer = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1;
   margin: 16px;
 `;
+
 const OptionTitle = styled.div`
   font-size: 15px;
   font-weight: 600;
   margin: 10px 0;
 `;
+
 const EssentialOption = styled.div`
   font-size: 15px;
   font-weight: 500;
   margin-bottom: 4px;
 `;
+
 const AddtionalOption = styled.div`
   display: flex;
   flex-direction: column;
@@ -73,6 +84,7 @@ const AddtionalOption = styled.div`
     }
   }
 `;
+
 const BtnContainer = styled.div`
   position: absolute;
   bottom: 10px;
@@ -82,6 +94,7 @@ const BtnContainer = styled.div`
   gap: 8px;
   margin-top: 16px;
 `;
+
 const Button = styled.div`
   background-color: ${theme.color.ui_1};
   color: ${theme.color.white};
@@ -101,10 +114,15 @@ export default function DetailOption({ isOpen, onClose, menu }) {
     option1: false,
     option2: false,
   });
+  const [showAddedModal, setShowAddedModal] = useState(false);
+  const [isCartVisible, setIsCartVisible] = useState(false); // 장바구니 UI 상태
+  const [cartItems, setCartItems] = useState([]); // 장바구니 항목
+  const [total, setTotal] = useState(0); // 총 금액
 
   const handleEssentialChange = (value) => {
     setEssential(value);
   };
+
   const handleExtrasChange = (e) => {
     const { name, checked } = e.target;
     setExtras((prev) => ({
@@ -113,103 +131,129 @@ export default function DetailOption({ isOpen, onClose, menu }) {
     }));
   };
   const handleAddToCart = () => {
-    console.log("장바구니에 추가된 항목:", {
-      menu: menu.title,
-      essentialOption: essential,
-      additionalOptions: extras,
-    });
-    onClose(); // 모달 닫기
+    // 장바구니에 추가할 항목 생성
+    const newItem = {
+      name: menu.title,
+      price: parseInt(menu.price.replace(/,/g, "")), // 숫자 변환
+      quantity: 1,
+      options: [
+        `맵기: ${essential}`,
+        extras.option1 ? "+ 면사리 (6,000원)" : "",
+        extras.option2 ? "+ 굴 50g (8,000원)" : "",
+      ].filter(Boolean),
+    };
+
+    // 장바구니 상태 업데이트
+    setCartItems((prev) => [...prev, newItem]);
+    setTotal((prev) => prev + newItem.price);
+
+    // 첫 번째 모달 닫기
+    onClose();
+
+    // 첫 번째 모달 닫힌 후 알림 모달 띄우기
+    setTimeout(() => {
+      setShowAddedModal(true); // 두 번째 모달 표시
+
+      // 3초 후 알림 모달 닫기
+      setTimeout(() => {
+        setShowAddedModal(false);
+        setIsCartVisible(true); // 장바구니 UI 표시
+      }, 3000);
+    }, 300); // 첫 번째 모달 닫히는 시간 후 실행
   };
 
   if (!menu) return null;
+
   return (
-    <Modal
-      isOpen={isOpen}
-      onRequestClose={onClose}
-      style={{
-        overlay: {
-          backgroundColor: "rgba(0, 0, 0, 0.6)", //색 바꿀수도
-        },
-        content: {
-          width: "600px",
-          margin: "auto",
-          borderRadius: "12px",
-          padding: "0",
-        },
-      }}
-    >
-      <Wrapper>
-        <ModalContent>
-          <ModalLeft>
-            <Img src={menu.image} alt={menu.title}></Img>
-            <MenuItems>
-              <Title>{menu.title}</Title>
-              <Price>{menu.price}</Price>
-            </MenuItems>
-          </ModalLeft>
+    <>
+      <Modal
+        isOpen={isOpen}
+        onRequestClose={onClose}
+        style={{
+          overlay: {
+            backgroundColor: "rgba(0, 0, 0, 0.6)",
+          },
+          content: {
+            width: "600px",
+            margin: "auto",
+            borderRadius: "12px",
+            padding: "0",
+          },
+        }}
+      >
+        <Wrapper>
+          <ModalContent>
+            <ModalLeft>
+              <Img src={menu.image} alt={menu.title}></Img>
+              <MenuItems>
+                <Title>{menu.title}</Title>
+                <Price>{menu.price}</Price>
+              </MenuItems>
+            </ModalLeft>
 
-          <OptionContainer>
-            <EssentialOption>
-              <OptionTitle>맵기 옵션 (필수)</OptionTitle>
-              <label>
-                <input
-                  type="radio"
-                  name="essential"
-                  value="순하게"
-                  checked={essential === "순하게"}
-                  onChange={() => handleEssentialChange("순하게")}
-                />
-                순하게
-              </label>
-              <label>
-                <input
-                  type="radio"
-                  name="essential"
-                  value="약간 맵게"
-                  checked={essential === "약간 맵게"}
-                  onChange={() => handleEssentialChange("약간 맵게")}
-                />
-                약간 맵게
-              </label>
-              <label>
-                <input
-                  type="radio"
-                  name="essential"
-                  value="아주 맵게"
-                  checked={essential === "아주 맵게"}
-                  onChange={() => handleEssentialChange("아주 맵게")}
-                />
-                아주 맵게
-              </label>
-            </EssentialOption>
-            <AddtionalOption>
-              <OptionTitle>추가 옵션 (선택)</OptionTitle>
-              <label>
-                <input
-                  type="checkbox"
-                  name="option1"
-                  checked={extras.option1}
-                  onChange={handleExtrasChange}
-                />
-                + 면사리 (6,000원)
-              </label>
-              <label>
-                <input
-                  type="checkbox"
-                  name="option2"
-                  checked={extras.option2}
-                  onChange={handleExtrasChange}
-                />
-                + 굴 50g (8,000원)
-              </label>
-            </AddtionalOption>
-          </OptionContainer>
-        </ModalContent>
+            <OptionContainer>
+              <EssentialOption>
+                <OptionTitle>맵기 옵션 (필수)</OptionTitle>
+                <label>
+                  <input
+                    type="radio"
+                    name="essential"
+                    value="순하게"
+                    checked={essential === "순하게"}
+                    onChange={() => handleEssentialChange("순하게")}
+                  />
+                  순하게
+                </label>
+                <label>
+                  <input
+                    type="radio"
+                    name="essential"
+                    value="약간 맵게"
+                    checked={essential === "약간 맵게"}
+                    onChange={() => handleEssentialChange("약간 맵게")}
+                  />
+                  약간 맵게
+                </label>
+                <label>
+                  <input
+                    type="radio"
+                    name="essential"
+                    value="아주 맵게"
+                    checked={essential === "아주 맵게"}
+                    onChange={() => handleEssentialChange("아주 맵게")}
+                  />
+                  아주 맵게
+                </label>
+              </EssentialOption>
+              <AddtionalOption>
+                <OptionTitle>추가 옵션 (선택)</OptionTitle>
+                <label>
+                  <input
+                    type="checkbox"
+                    name="option1"
+                    checked={extras.option1}
+                    onChange={handleExtrasChange}
+                  />
+                  + 면사리 (6,000원)
+                </label>
+                <label>
+                  <input
+                    type="checkbox"
+                    name="option2"
+                    checked={extras.option2}
+                    onChange={handleExtrasChange}
+                  />
+                  + 굴 50g (8,000원)
+                </label>
+              </AddtionalOption>
+            </OptionContainer>
+          </ModalContent>
 
-        <BtnContainer>
-          <Button onClick={handleAddToCart}>장바구니 담기</Button>
-        </BtnContainer>
-      </Wrapper>
-    </Modal>
+          <BtnContainer>
+            <Button onClick={handleAddToCart}>장바구니 담기</Button>
+          </BtnContainer>
+        </Wrapper>
+      </Modal>
+    </>
   );
 }

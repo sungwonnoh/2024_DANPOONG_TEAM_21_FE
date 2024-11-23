@@ -7,6 +7,8 @@ import sweetPotato from "../../../assets/images/restaurant/sweetPotato.png";
 import { NextBtn, PrevBtn } from "../../../components/stepBtn";
 import { useLocation, useNavigate } from "react-router-dom";
 import DetailOption from "../../../components/modal/detailoption";
+import AddToCartModal from "../../../components/modal/addToCartModal";
+import ShoppingCart from "../../../components/shoppingcart";
 
 const Wrapper = styled.div`
   display: flex;
@@ -33,6 +35,7 @@ const TableNum = styled.div`
   margin-left: auto;
   align-items: center;
   justify-content: center;
+  z-index: 9999;
 `;
 const Body = styled.div`
   display: flex;
@@ -111,42 +114,18 @@ const BtnContainer = styled.div`
 export default function Kiosk() {
   const sideItems = ["런치세트", "시즌메뉴", "메인", "사이드"];
   const MenuItems = [
-    {
-      title: "방어 사시미",
-      price: "40,000원",
-      image: fish,
-      //onClick: () => handleClick("option"),
-      onClick: () => console.log("방어 사시미 선택"),
-    },
-    {
-      title: "굴탕면",
-      price: "21,000원",
-      image: Gultangmyeon,
-      //onClick: () => handleClick("option"),
-      onClick: () => console.log("굴탕면 선택"),
-    },
-    {
-      title: "고구마맛탕",
-      price: "12,000원",
-      image: sweetPotato,
-      //onClick: () => handleClick("option"),
-      onClick: () => console.log("고구마맛탕 선택"),
-    },
+    { title: "방어 사시미", price: "40,000원", image: fish },
+    { title: "굴탕면", price: "21,000원", image: Gultangmyeon },
+    { title: "고구마맛탕", price: "12,000원", image: sweetPotato },
   ];
 
-  const navigate = useNavigate();
-  const location = useLocation();
+  const [isModalOpen, setIsModalOpen] = useState(false); // Option modal
+  const [selectedMenu, setSelectedMenu] = useState(null); // Current menu item
+  const [cartItems, setCartItems] = useState([]); // Cart state
+  const [isCartVisible, setIsCartVisible] = useState(false); // Cart visibility
+  const [showAddedModal, setShowAddedModal] = useState(false); // Alert modal
 
-  const queryParams = new URLSearchParams(location.search);
-  const selectedOption = queryParams.get("option");
-
-  const handleClick = (item) => {
-    navigate(`?option=${item}`);
-  };
-
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedMenu, setSelectedMenu] = useState(null);
-
+  // Handlers
   const handleMenuClick = (menu) => {
     setSelectedMenu(menu);
     setIsModalOpen(true);
@@ -156,70 +135,75 @@ export default function Kiosk() {
     setSelectedMenu(null);
     setIsModalOpen(false);
   };
-  useEffect(() => {
-    const lockOrientation = async () => {
-      try {
-        if (screen.orientation && screen.orientation.lock) {
-          await screen.orientation.lock("landscape");
-          console.log("Screen locked to landscape");
-        } else {
-          console.warn("Screen Orientation API is not supported.");
-          alert("가로모드로 최적화된 화면입니다. 기기를 직접 회전해주세요.");
-        }
-      } catch (err) {
-        console.error("Screen orientation lock failed:", err.name, err.message);
-      }
-    };
 
-    lockOrientation();
-  }, []);
+  const handleAddToCart = (item) => {
+    setCartItems((prev) => [...prev, item]); // Add item to cart
+    setIsModalOpen(false); // Close the option modal
+    setShowAddedModal(true); // Show alert modal
+    setIsCartVisible(true); // Open cart
+
+    setTimeout(() => {
+      setShowAddedModal(false); // Hide alert modal after 3 seconds
+    }, 3000);
+  };
 
   return (
-    <>
-      <Wrapper>
-        <Header>
-          <TableNum>테이블 1</TableNum>
-        </Header>
+    <Wrapper>
+      {/* Header */}
+      <Header>
+        <TableNum>테이블 1</TableNum>
+      </Header>
 
-        {/*body*/}
-        <Body>
-          <BlackSide />
-          <Sidebar>
-            {sideItems.map((item, index) => (
-              <Items
-                key={index}
-                active={item === selectedOption}
-                onClick={() => handleClick(item)}
-              >
-                {item}
-              </Items>
+      {/* Body */}
+      <Body>
+        <BlackSide />
+        <Sidebar>
+          {sideItems.map((item, index) => (
+            <Items key={index} active={false}>
+              {item}
+            </Items>
+          ))}
+        </Sidebar>
+        <Container>
+          <MenuContainer>
+            {MenuItems.map((menu, index) => (
+              <MenuItem key={index} onClick={() => handleMenuClick(menu)}>
+                <Img src={menu.image} alt={menu.title} />
+                <Menu>{menu.title}</Menu>
+                <Price>{menu.price}</Price>
+              </MenuItem>
             ))}
-          </Sidebar>
-          <Container>
-            <MenuContainer>
-              {MenuItems.map((menu, index) => (
-                <MenuItem key={index} onClick={() => handleMenuClick(menu)}>
-                  <Img src={menu.image} alt={menu.title} />
-                  <Menu>{menu.title}</Menu>
-                  <Price>{menu.price}</Price>
-                </MenuItem>
-              ))}
-            </MenuContainer>
-          </Container>
-          <BlackSide />
-        </Body>
+          </MenuContainer>
+        </Container>
+        <BlackSide />
+      </Body>
 
-        {/* {Button} */}
-        <BtnContainer>
-          <PrevBtn></PrevBtn>
-          <NextBtn></NextBtn>
-        </BtnContainer>
-        <DetailOption
-          isOpen={isModalOpen}
-          onClose={handleCloseModal}
-          menu={selectedMenu}
+      {/* Navigation Buttons */}
+      <BtnContainer>
+        <PrevBtn />
+        <NextBtn />
+      </BtnContainer>
+
+      {/* Modals */}
+      <DetailOption
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        menu={selectedMenu}
+        onAddToCart={handleAddToCart} // Pass add-to-cart handler
+      />
+
+      {/* 추가된 알림 모달 */}
+      <AddToCartModal show={showAddedModal} message="상품을 추가했습니다" />
+
+      {/* 장바구니 UI */}
+      {isCartVisible && (
+        <ShoppingCart
+          isOpen={isCartVisible}
+          onClose={() => setIsCartVisible(false)}
+          cartItems={cartItems}
+          total={total}
         />
-      </Wrapper>
-    </>
+      )}
+    </Wrapper>
   );
 }

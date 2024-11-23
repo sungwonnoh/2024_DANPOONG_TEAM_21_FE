@@ -60,7 +60,7 @@ const Items = styled.div`
   height: 48px;
   border-radius: 8px;
   background-color: ${(props) =>
-    props.active ? theme.color.main : theme.color.ui_3};
+    props.active ? theme.color.ui_1 : theme.color.ui_3};
   color: ${theme.color.white};
   font-size: 17px;
   font-weight: 500;
@@ -219,6 +219,7 @@ export default function Kiosk() {
           isOpen={isCartVisible}
           onClose={() => setIsCartVisible(false)}
           cartItems={cartItems}
+          setCartItems={setCartItems}
           //total={total}
         />
       )}

@@ -114,10 +114,6 @@ export default function DetailOption({ isOpen, onClose, menu, onAddToCart }) {
     option1: false,
     option2: false,
   });
-  const [showAddedModal, setShowAddedModal] = useState(false);
-  const [isCartVisible, setIsCartVisible] = useState(false); // 장바구니 UI 상태
-  const [cartItems, setCartItems] = useState([]); // 장바구니 항목
-  const [total, setTotal] = useState(0); // 총 금액
 
   const handleEssentialChange = (value) => {
     setEssential(value);
@@ -131,23 +127,27 @@ export default function DetailOption({ isOpen, onClose, menu, onAddToCart }) {
     }));
   };
   const handleAddToCart = () => {
+    if (!essential) {
+      alert("필수 옵션을 선택해주세요.");
+      return;
+    }
     if (!onAddToCart) {
       console.error("onAddToCart 함수가 전달되지 않았습니다.");
       return;
     }
     const newItem = {
       name: menu.title,
-      price: parseInt(menu.price.replace(/,/g, "")), // 숫자로 변환
+      price: parseInt(menu.price.replace(/,/g, "")),
       quantity: 1,
       options: [
-        `맵기: ${essential}`,
-        extras.option1 ? "+ 면사리 (6,000원)" : "",
-        extras.option2 ? "+ 굴 50g (8,000원)" : "",
+        `맵기 선택: ${essential}`,
+        extras.option1 ? "추가 선택: + 면사리 (6,000원)" : "",
+        extras.option2 ? "추가 선택: + 굴 50g (8,000원)" : "",
       ].filter(Boolean),
     };
 
-    onAddToCart(newItem); // 부모 컴포넌트의 장바구니 핸들러 호출
-    onClose(); // 옵션 모달 닫기
+    onAddToCart(newItem);
+    onClose();
   };
 
   if (!menu) return null;
@@ -238,7 +238,9 @@ export default function DetailOption({ isOpen, onClose, menu, onAddToCart }) {
           </ModalContent>
 
           <BtnContainer>
-            <Button onClick={handleAddToCart}>장바구니 담기</Button>
+            <Button onClick={handleAddToCart} disabled={!essential}>
+              장바구니 담기
+            </Button>
           </BtnContainer>
         </Wrapper>
       </Modal>

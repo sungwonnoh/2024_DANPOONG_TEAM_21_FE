@@ -83,9 +83,8 @@ export const MenuBox = styled.div`
   overflow: auto;
 `;
 export const Menu = styled.div`
-  // width: 105px;
   width: 100%;
-  height: 26dvh;
+  height: 23dvh;
 
   display: flex;
   flex-direction: column;

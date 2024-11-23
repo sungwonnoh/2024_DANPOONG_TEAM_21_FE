@@ -3,6 +3,8 @@ import * as S from "./optionModal.style";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
+import theme from "../../../../../styles/theme";
+
 export default function OptionModal({
   menu,
   isOpen,
@@ -11,6 +13,7 @@ export default function OptionModal({
   onOptionSelect,
   setCart,
   onMenuClick,
+  activeIndex,
 }) {
   const [selectedItems, setSelectedItems] = useState([]); // 선택된 옵션 상태를 배열로 관리
   const location = useLocation();
@@ -86,6 +89,13 @@ export default function OptionModal({
                               onMenuClick(5, true, e);
                             if (location.pathname === "/practice/cafe/menu")
                               handleSelect(value2);
+
+                            console.log(activeIndex);
+                          }}
+                          style={{
+                            border:
+                              activeIndex === 5 &&
+                              `3px ${theme.color.sub} solid`,
                           }}
                         >
                           <p>{value2.name}</p>
@@ -106,6 +116,9 @@ export default function OptionModal({
                 onMenuClick(7, true, e);
               if (location.pathname === "/practice/cafe/menu") onClose();
             }}
+            style={{
+              border: activeIndex === 7 && `3px ${theme.color.sub} solid`,
+            }}
           >
             닫기
           </button>
@@ -121,6 +134,9 @@ export default function OptionModal({
                 };
                 setCart((prev) => [...prev, newItem]);
               }
+            }}
+            style={{
+              border: activeIndex === 6 && `3px ${theme.color.sub} solid`,
             }}
           >
             장바구니 담기

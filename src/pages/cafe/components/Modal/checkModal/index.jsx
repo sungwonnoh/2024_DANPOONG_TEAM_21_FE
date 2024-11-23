@@ -1,8 +1,15 @@
 import PropTypes from "prop-types";
 import * as S from "./checkModal.style";
 import { useLocation, useNavigate } from "react-router-dom";
+import theme from "../../../../../styles/theme";
 
-export default function CheckModal({ isOpen, onClose, cart, onMenuClick }) {
+export default function CheckModal({
+  isOpen,
+  onClose,
+  cart,
+  onMenuClick,
+  activeIndex,
+}) {
   const handleBackgroundClick = (e) => {
     if (
       e.target === e.currentTarget &&
@@ -53,6 +60,9 @@ export default function CheckModal({ isOpen, onClose, cart, onMenuClick }) {
                 onMenuClick(9, true, e);
               if (location.pathname === "/practice/cafe/menu") onClose();
             }}
+            style={{
+              border: activeIndex === 9 && `3px ${theme.color.sub} solid`,
+            }}
           >
             돌아가기
           </button>
@@ -61,6 +71,9 @@ export default function CheckModal({ isOpen, onClose, cart, onMenuClick }) {
               if (location.pathname === "/description/cafe/menu")
                 onMenuClick(8, true, e);
               if (location.pathname === "/practice/cafe/menu") handleComplete();
+            }}
+            style={{
+              border: activeIndex === 8 && `3px ${theme.color.sub} solid`,
             }}
           >
             카드 결제하기

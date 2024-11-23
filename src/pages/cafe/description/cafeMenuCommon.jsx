@@ -8,6 +8,8 @@ import CheckModal from "../components/Modal/checkModal";
 import ExplainModal from "../components/Modal/explainModal";
 import info from "../../../datas/popupInfo.jsx";
 
+import theme from "../../../styles/theme.js";
+
 export default function CafeMenuCommon() {
   const navigate = useNavigate();
   const location = useLocation(); // 현재 경로 가져오기
@@ -35,15 +37,27 @@ export default function CafeMenuCommon() {
   const [isCheckModalOpen, setIsCheckModalOpen] = useState(false);
 
   const [activeInfo, setActiveInfo] = useState(null); // 현재 활성화된 info 저장
+  const [activeIndex, setActiveIndex] = useState(null);
 
   const handleMenuClick = (index) => {
     if (location.pathname === "/description/cafe/menu") {
       setActiveInfo(info[index]);
+      setActiveIndex(index);
     } else {
       console.log(
         "메뉴 클릭은 이 경로에서만 가능합니다: /description/cafe/menu"
       );
     }
+  };
+
+  // 클릭 시 handleCloseModal을 호출할지 여부를 결정하는 함수
+  const handleClick = (index, isMenuClick = false, e) => {
+    if (!isMenuClick) {
+      handleCloseModal();
+    }
+    e.stopPropagation();
+    setActiveIndex(index);
+    handleMenuClick(index);
   };
 
   // ExplainModal 닫기
@@ -97,22 +111,18 @@ export default function CafeMenuCommon() {
     setLevel((prev) => Math.max(prev - 1, 0)); // 최소값 제한
   };
 
-  // 클릭 시 handleCloseModal을 호출할지 여부를 결정하는 함수
-  const handleClick = (index, isMenuClick = false, e) => {
-    if (!isMenuClick) {
-      handleCloseModal();
-    }
-    e.stopPropagation();
-    handleMenuClick(index);
-  };
-
   return (
     <>
       <S.App>
         <S.Container onClick={handleCloseModal}>
           <S.Header>
             <img src={exitIcon} alt="exitIcon" />
-            <S.TabBar id="tabBar">
+            <S.TabBar
+              id="tabBar"
+              style={{
+                border: activeIndex === 1 && `3px ${theme.color.sub} solid`,
+              }}
+            >
               <section onClick={(e) => handleClick(1, true, e)}>커피</section>
               <section onClick={(e) => handleClick(1, true, e)}>논커피</section>
               <section onClick={(e) => handleClick(1, true, e)}>디저트</section>
@@ -124,7 +134,13 @@ export default function CafeMenuCommon() {
           <S.MenuBox>
             {cafeData.map((value, index) => {
               return (
-                <S.Menu key={index} onClick={(e) => handleClick(0, true, e)}>
+                <S.Menu
+                  key={index}
+                  onClick={(e) => handleClick(0, true, e)}
+                  style={{
+                    border: activeIndex === 0 && `3px ${theme.color.sub} solid`,
+                  }}
+                >
                   <img src={value.image} />
                   <h1>{value.name}</h1>
                   <p>{value.price}원</p>
@@ -133,7 +149,13 @@ export default function CafeMenuCommon() {
             })}
           </S.MenuBox>
           <S.PaymentBox>
-            <S.Left id="left" onClick={(e) => handleClick(2, true, e)}>
+            <S.Left
+              id="left"
+              onClick={(e) => handleClick(2, true, e)}
+              style={{
+                border: activeIndex === 2 && `3px ${theme.color.sub} solid`,
+              }}
+            >
               {level >= 1 && (
                 <>
                   <S.Info>
@@ -151,7 +173,12 @@ export default function CafeMenuCommon() {
             </S.Left>
             <S.Right>
               <S.Top>
-                <button onClick={(e) => handleClick(3, true, e)}>
+                <button
+                  onClick={(e) => handleClick(3, true, e)}
+                  style={{
+                    border: activeIndex === 3 && `3px ${theme.color.sub} solid`,
+                  }}
+                >
                   전체 삭제
                 </button>
                 <div>
@@ -159,7 +186,12 @@ export default function CafeMenuCommon() {
                   <p>120초</p>
                 </div>
               </S.Top>
-              <S.PayBtn onClick={(e) => handleClick(4, true, e)}>
+              <S.PayBtn
+                onClick={(e) => handleClick(4, true, e)}
+                style={{
+                  border: activeIndex === 4 && `3px ${theme.color.sub} solid`,
+                }}
+              >
                 결제하기
               </S.PayBtn>
             </S.Right>
@@ -191,12 +223,14 @@ export default function CafeMenuCommon() {
         optionData={optionData}
         onMenuClick={handleMenuClick}
         handleCloseModal={handleCloseModal}
+        activeIndex={activeIndex}
       />
       <CheckModal
         isOpen={isCheckModalOpen}
         onClose={handleCheckClose}
         cart={cart}
         onMenuClick={handleMenuClick}
+        activeIndex={activeIndex}
       />
       {activeInfo && <ExplainModal info={activeInfo} />}
     </>

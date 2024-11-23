@@ -1,8 +1,6 @@
 import Modal from "react-modal";
 import styled from "styled-components";
 import theme from "../../styles/theme";
-import { useState } from "react";
-import PaymentModal from "./paymentModal";
 
 Modal.setAppElement("#root");
 
@@ -52,21 +50,7 @@ const OrderBtn = styled.button`
   color: ${theme.color.white};
   background-color: ${theme.color.ui_1};
 `;
-export default function OrderModal({ isOpen, onClose, onOpenPaymentModal }) {
-  const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
-
-  const handleOrderClick = () => {
-    onClose(); // 현재 모달 닫기
-    setIsPaymentModalOpen(true); // 새로운 모달 열기
-  };
-
-  const handlePaymentClose = () => {
-    setIsPaymentModalOpen(false); // 새로운 모달 닫기
-  };
-  const handlePaymentCompletion = () => {
-    alert("결제가 완료되었습니다!");
-    setIsPaymentModalOpen(false); // 결제 모달 닫기
-  };
+export default function PaymentModal({ isOpen, onClose, onOrder }) {
   return (
     <>
       <Modal
@@ -86,20 +70,10 @@ export default function OrderModal({ isOpen, onClose, onOpenPaymentModal }) {
         }}
       >
         <Wrapper>
-          <Container>
-            주문 상품의 옵션과 수량을 <br />
-            모두 확인하셨습니까?
-          </Container>
+          <Container>하단의 카드를 꽂아주세요</Container>
           <Button>
-            <CloseBtn onClick={onClose}>닫기</CloseBtn>
-            <OrderBtn
-              onClick={() => {
-                onClose(); // 현재 모달 닫기
-                onOpenPaymentModal(); // 결제 모달 열기
-              }}
-            >
-              주문하기
-            </OrderBtn>
+            <CloseBtn onClick={onClose}>직원 호출</CloseBtn>
+            <OrderBtn onClick={onOrder}>카드 결제</OrderBtn>
           </Button>
         </Wrapper>
       </Modal>

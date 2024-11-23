@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import theme from "../styles/theme";
 import OrderModal from "./modal/orderModal";
+import PaymentModal from "./modal/paymentModal";
 
 const Wrapper = styled.div`
   display: flex;
@@ -181,17 +182,17 @@ export default function ShoppingCart({
     0
   );
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const handleOrderButtonClick = () => {
+  const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
+
+  const handleOrderClick = () => {
     setIsModalOpen(true); // 주문 확인 모달 열기
   };
-  const handleOrderConfirmation = () => {
-    alert("주문이 완료되었습니다!");
-    setIsModalOpen(false);
+
+  const handlePaymentCompletion = () => {
+    alert("결제가 완료되었습니다!");
+    setIsPaymentModalOpen(false); // 결제 모달 닫기
     onClose(); // 장바구니 닫기
     setCartItems([]); // 장바구니 비우기
-  };
-  const handleModalClose = () => {
-    setIsModalOpen(false); // 주문 모달 닫기
   };
 
   const increaseQuantity = (index) => {
@@ -252,12 +253,21 @@ export default function ShoppingCart({
           <Price>총 주문 금액</Price>
           <PriceNum>{totalPrice.toLocaleString()}원</PriceNum>
         </Total>
-        <OrderButton onClick={handleOrderButtonClick}>주문하기</OrderButton>
+        <OrderButton onClick={handleOrderClick}>주문하기</OrderButton>
       </CartWrapper>
       <OrderModal
         isOpen={isModalOpen}
-        onClose={handleModalClose}
-        onOrder={handleOrderConfirmation}
+        onClose={() => setIsModalOpen(false)}
+        onOpenPaymentModal={() => {
+          setIsModalOpen(false); // 주문 모달 닫기
+          setIsPaymentModalOpen(true); // 결제 모달 열기
+        }}
+      />
+      {/* 결제 모달 */}
+      <PaymentModal
+        isOpen={isPaymentModalOpen}
+        onClose={() => setIsPaymentModalOpen(false)}
+        onOrder={handlePaymentCompletion}
       />
     </Wrapper>
   );

@@ -5,7 +5,7 @@ import fish from "../../../assets/images/restaurant/fish.png";
 import Gultangmyeon from "../../../assets/images/restaurant/Gultangmyeon.png";
 import sweetPotato from "../../../assets/images/restaurant/sweetPotato.png";
 import { NextBtn, PrevBtn } from "../../../components/stepBtn";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import DetailOption from "../../../components/modal/detailoption";
 import AddToCartModal from "../../../components/modal/addToCartModal";
 import ShoppingCart from "../../../components/shoppingcart";
@@ -125,13 +125,12 @@ export default function Kiosk() {
   const [cartItems, setCartItems] = useState([]); // Cart state
   const [isCartVisible, setIsCartVisible] = useState(false); // Cart visibility
   const [showAddedModal, setShowAddedModal] = useState(false); // Alert modal
-
+  const { option } = useParams();
+  const [selectedOption, setSelectedOption] = useState(option || "시즌메뉴");
   const navigate = useNavigate();
-  const location = useLocation();
-  const queryParams = new URLSearchParams(location.search);
-  const selectedOption = queryParams.get("option");
 
   const handleClick = (item) => {
+    setSelectedOption(item);
     navigate(`/description/restaurant/main/?option=${item}`);
   };
   // Handlers

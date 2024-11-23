@@ -8,8 +8,9 @@ import Start_cafe from "../pages/cafe/index";
 import Start_fastfood from "../pages/fastfood/index";
 import Kiosk from "../pages/restaurant/description/kiosk";
 import MainHelp from "../pages/mainhelp";
-import CafeMenu from "../pages/cafe/cafeMenu.jsx";
-import CompleteScreen from "../pages/cafe/CompleteScreen.jsx";
+import CafeMenu from "../pages/cafe/practice/cafeMenu.jsx";
+import CafeMenuCommon from "../pages/cafe/description/cafeMenuCommon.jsx";
+import CompleteScreen from "../pages/cafe/description/completeScreen.jsx";
 import FinishRestaurant from "../pages/restaurant/description/finish.jsx";
 
 export const routes = createBrowserRouter([
@@ -43,7 +44,7 @@ export const routes = createBrowserRouter([
   },
   {
     path: "/description/cafe/menu",
-    element: <CafeMenu />,
+    element: <CafeMenuCommon />,
   },
   {
     path: "/description/cafe/complete",
@@ -58,8 +59,12 @@ export const routes = createBrowserRouter([
     element: <Kiosk />,
   },
   {
-    path: "//description/restaurant/complete",
+    path: "/description/restaurant/complete",
     element: <FinishRestaurant />,
+  },
+  {
+    path: "/practice/cafe/menu",
+    element: <CafeMenu />,
   },
 ]);
 

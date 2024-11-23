@@ -9,7 +9,7 @@ const useKakaoLogin = (code) => {
   const fetchKakaoData = async () => {
     try {
       const res = await axios.post(
-        `${serverURL}/api/v1/login/kakao?code=${code}`,
+        `/api/v1/login/oauth2/kakao?code=${code}`,
         {}
       ); // API 명세서에 따라 method, uri 바뀔 예정
 

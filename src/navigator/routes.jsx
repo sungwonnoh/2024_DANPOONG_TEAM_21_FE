@@ -10,6 +10,7 @@ import Kiosk from "../pages/restaurant/description/kiosk";
 import MainHelp from "../pages/mainhelp";
 import CafeMenu from "../pages/cafe/cafeMenu.jsx";
 import CompleteScreen from "../pages/cafe/CompleteScreen.jsx";
+import FinishRestaurant from "../pages/restaurant/description/finish.jsx";
 
 export const routes = createBrowserRouter([
   {
@@ -55,6 +56,10 @@ export const routes = createBrowserRouter([
   {
     path: "/description/restaurant/main",
     element: <Kiosk />,
+  },
+  {
+    path: "//description/restaurant/complete",
+    element: <FinishRestaurant />,
   },
 ]);
 

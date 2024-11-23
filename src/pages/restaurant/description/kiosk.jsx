@@ -1,11 +1,11 @@
 import styled from "styled-components";
 import theme from "../../../styles/theme";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import fish from "../../../assets/images/restaurant/fish.png";
 import Gultangmyeon from "../../../assets/images/restaurant/Gultangmyeon.png";
 import sweetPotato from "../../../assets/images/restaurant/sweetPotato.png";
 import { NextBtn, PrevBtn } from "../../../components/stepBtn";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import DetailOption from "../../../components/modal/detailoption";
 import AddToCartModal from "../../../components/modal/addToCartModal";
 import ShoppingCart from "../../../components/shoppingcart";
@@ -219,7 +219,6 @@ export default function Kiosk() {
           onClose={() => setIsCartVisible(false)}
           cartItems={cartItems}
           setCartItems={setCartItems}
-          //total={total}
         />
       )}
     </Wrapper>

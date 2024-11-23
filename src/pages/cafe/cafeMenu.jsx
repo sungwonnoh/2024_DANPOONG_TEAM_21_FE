@@ -5,6 +5,7 @@ import { cafe, beverageOptions, dessertOptions } from "../../datas/cafe";
 import OptionModal from "./components/Modal/optionModal";
 import { useNavigate } from "react-router-dom";
 import CheckModal from "./components/Modal/checkModal";
+import CancelModal from "./components/Modal/cancelModal";
 export default function CafeMenu() {
   const [choice, setChoice] = useState("coffee");
   const cafeData = useRef(cafe.coffee);
@@ -17,6 +18,7 @@ export default function CafeMenu() {
 
   const [isOptionModalOpen, setIsOptionModalOpen] = useState(false);
   const [isCheckModalOpen, setIsCheckModalOpen] = useState(false);
+  const [isCancelModalOpen, setIsCancelModalOpen] = useState(false);
 
   const navigate = useNavigate();
 
@@ -45,7 +47,7 @@ export default function CafeMenu() {
     setSelectedOptions((prevOptions) => [...prevOptions, option]);
   };
 
-  // optionmodal open
+  // option modal
   const handleOptionOpen = (value) => {
     setIsOptionModalOpen(true);
     setMenu(value);
@@ -56,19 +58,27 @@ export default function CafeMenu() {
       optionData.current = beverageOptions;
     }
   };
-
-  // option modal close
   const handleOptionClose = () => {
     setIsOptionModalOpen(false);
     setChoice(choice);
   };
 
+  // check modal
   const handleCheckOpen = () => {
     setIsCheckModalOpen(true);
   };
   const handleCheckClose = () => {
     setIsCheckModalOpen(false);
   };
+
+  // check modal
+  const handleCancelOpen = () => {
+    setIsCancelModalOpen(true);
+  };
+  const handleCancelClose = () => {
+    setIsCancelModalOpen(false);
+  };
+
   useEffect(() => {
     const id = setInterval(() => {
       setTime((time) => time - 1);
@@ -93,7 +103,7 @@ export default function CafeMenu() {
       <S.App>
         <S.Container>
           <S.Header>
-            <img src={exitIcon} alt="exitIcon" onClick={() => navigate(-1)} />
+            <img src={exitIcon} alt="exitIcon" onClick={handleCancelOpen} />
             <S.TabBar choice={choice}>
               <section
                 id="coffee"
@@ -164,7 +174,7 @@ export default function CafeMenu() {
             </S.Left>
             <S.Right>
               <S.Top>
-                <button>전체 삭제</button>
+                <button onClick={() => setCart([])}>전체 삭제</button>
                 <div>
                   <h1>남은 시간</h1>
                   <p>{time}초</p>
@@ -193,6 +203,7 @@ export default function CafeMenu() {
         onClose={handleCheckClose}
         cart={cart}
       />
+      <CancelModal isOpen={isCancelModalOpen} onClose={handleCancelClose} />
     </>
   );
 }

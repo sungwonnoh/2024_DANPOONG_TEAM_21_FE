@@ -5,9 +5,9 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  //padding: 20px;
   align-items: center;
-  margin-top: 54px;
+  padding: 10px 20px;
+  margin-top: 20px;
   height: 90vh;
   overflow: hidden;
 `;

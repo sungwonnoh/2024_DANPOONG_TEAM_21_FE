@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import theme from "../../../styles/theme";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import fish from "../../../assets/images/restaurant/fish.png";
 import Gultangmyeon from "../../../assets/images/restaurant/Gultangmyeon.png";
 import sweetPotato from "../../../assets/images/restaurant/sweetPotato.png";
@@ -111,9 +111,8 @@ const BtnContainer = styled.div`
   left: 16px;
   display: flex;
   gap: 8px;
-  z-index: 999;
 `;
-export default function Kiosk() {
+export default function Practice() {
   const sideItems = ["런치세트", "시즌메뉴", "메인", "사이드"];
   const MenuItems = [
     { title: "방어 사시미", price: "40,000원", image: fish },
@@ -161,66 +160,6 @@ export default function Kiosk() {
     }, 3300);
   };
 
-  const [level, setLevel] = useState(0);
-  const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
-  const [isShoppingModalOpen, setIsShoppingModalOpen] = useState(false);
-  const [isOrderModalOpen, setIsOrderModalOpen] = useState(false);
-  const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
-  useEffect(() => {
-    switch (level) {
-      case 0:
-        setIsDetailModalOpen(false);
-        setIsShoppingModalOpen(false);
-        setIsOrderModalOpen(false);
-        setIsPaymentModalOpen(false);
-        break;
-      case 1:
-        break;
-      case 2:
-        break;
-      case 3:
-        setIsDetailModalOpen(true);
-        setIsShoppingModalOpen(false);
-        setIsOrderModalOpen(false);
-        setIsPaymentModalOpen(false);
-        break;
-      case 4:
-        break;
-      case 5:
-        break;
-      case 6:
-        setIsDetailModalOpen(false);
-        setIsShoppingModalOpen(true);
-        setIsOrderModalOpen(false);
-        setIsPaymentModalOpen(false);
-        break;
-      case 7:
-        break;
-      case 8:
-        break;
-      case 13:
-        setIsDetailModalOpen(false);
-        setIsShoppingModalOpen(false);
-        setIsOrderModalOpen(true);
-        setIsPaymentModalOpen(false);
-        break;
-      case 14:
-        setIsDetailModalOpen(false);
-        setIsShoppingModalOpen(false);
-        setIsOrderModalOpen(false);
-        setIsPaymentModalOpen(true);
-        navigate("/description/restaurant/complete");
-      default:
-        break;
-    }
-  }, [level]);
-  const handleNext = () => {
-    setLevel((prev) => Math.min(prev + 1, level.length - 1));
-  };
-
-  const handlePrev = () => {
-    setLevel((prev) => Math.max(prev - 1, 0));
-  };
   return (
     <Wrapper>
       {/* Header */}
@@ -258,8 +197,8 @@ export default function Kiosk() {
 
       {/* Navigation Buttons */}
       <BtnContainer>
-        <PrevBtn onClick={handlePrev} disabled={level === 0} />
-        <NextBtn onClick={handleNext} disabled={level === level.length - 1} />
+        <PrevBtn />
+        <NextBtn />
       </BtnContainer>
 
       {/* Modals */}

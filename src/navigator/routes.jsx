@@ -1,4 +1,3 @@
-import { createBrowserRouter } from "react-router-dom";
 import Main from "../pages/main/index";
 import Signup from "../pages/signup/index";
 import KakaoRedirect from "../pages/kakaoRedirect";
@@ -11,56 +10,98 @@ import MainHelp from "../pages/mainhelp";
 import CafeMenu from "../pages/cafe/cafeMenu.jsx";
 import CompleteScreen from "../pages/cafe/CompleteScreen.jsx";
 import FinishRestaurant from "../pages/restaurant/description/finish.jsx";
+import Practice from "../pages/main/practice.jsx";
 
-export const routes = createBrowserRouter([
+const routes = [
   {
     path: "/",
-    element: <Main />,
+    component: Main,
+    headerOptions: { headerShown: false },
   },
   {
     path: "/help",
-    element: <MainHelp />,
+    component: MainHelp,
+    headerOptions: {
+      title: "도움 전달",
+      showBackButton: true,
+      headerShown: true,
+    },
   },
   {
     path: "/signup",
-    element: <Signup />,
+    component: Signup,
+    headerOptions: { headerShown: false },
   },
   {
     path: "/oauth",
-    element: <KakaoRedirect />,
+    component: KakaoRedirect,
+    headerOptions: { headerShown: false },
   },
   {
     path: "/description",
-    element: <Description />,
+    component: Description,
+    headerOptions: {
+      title: "설명 보기",
+      showBackButton: true,
+      headerShown: true,
+    },
   },
   {
     path: "/description/restaurant",
-    element: <Start_restaurant />,
+    component: Start_restaurant,
+    headerOptions: {
+      title: "설명 보기",
+      showBackButton: true,
+      headerShown: true,
+    },
   },
   {
     path: "/description/cafe",
-    element: <Start_cafe />,
+    component: Start_cafe,
+    headerOptions: {
+      title: "설명 보기",
+      showBackButton: true,
+      headerShown: true,
+    },
   },
   {
     path: "/description/cafe/menu",
-    element: <CafeMenu />,
+    component: CafeMenu,
+    headerOptions: { headerShown: false },
   },
   {
     path: "/description/cafe/complete",
-    element: <CompleteScreen />,
+    component: CompleteScreen,
+    headerOptions: { headerShown: false },
   },
   {
     path: "/description/fastfood",
-    element: <Start_fastfood />,
+    component: Start_fastfood,
+    headerOptions: {
+      title: "설명 보기",
+      showBackButton: true,
+      headerShown: true,
+    },
   },
   {
     path: "/description/restaurant/main",
-    element: <Kiosk />,
+    component: Kiosk,
+    headerOptions: { headerShown: false },
   },
   {
-    path: "//description/restaurant/complete",
-    element: <FinishRestaurant />,
+    path: "/description/restaurant/complete",
+    component: FinishRestaurant,
+    headerOptions: { headerShown: false },
   },
-]);
+  {
+    path: "/practice",
+    component: Practice,
+    headerOptions: {
+      title: "실습하기",
+      showBackButton: true,
+      headerShown: true,
+    },
+  },
+];
 
 export default routes;

@@ -1,13 +1,15 @@
-import { RouterProvider } from "react-router-dom";
-import GlobalStyles from "./styles/Globalstyles";
+import React from "react";
+import { BrowserRouter } from "react-router-dom";
+import GlobalStyles from "./styles/GlobalStyles";
+import CustomNavigator from "./navigator/CustomNavigator";
 import routes from "./navigator/routes";
 
 function App() {
   return (
-    <>
+    <BrowserRouter>
       <GlobalStyles />
-      <RouterProvider router={routes} />
-    </>
+      <CustomNavigator routes={routes} />
+    </BrowserRouter>
   );
 }
 

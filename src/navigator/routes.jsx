@@ -13,6 +13,8 @@ import CompleteScreen from "../pages/cafe/CompleteScreen.jsx";
 import FinishRestaurant from "../pages/restaurant/description/finish.jsx";
 import Practice from "../pages/main/practice.jsx";
 import Question from "../pages/restaurant/practice/question.jsx";
+import Complete from "../pages/restaurant/practice/complete.jsx";
+import Failed from "../pages/restaurant/practice/failed.jsx";
 
 const routes = [
   {
@@ -116,6 +118,16 @@ const routes = [
   {
     path: "/practice/restaurant/1",
     component: KioskPractice,
+    headerOptions: { headerShown: false },
+  },
+  {
+    path: "/practice/complete",
+    component: Complete,
+    headerOptions: { headerShown: false },
+  },
+  {
+    path: "/practice/failed",
+    component: Failed,
     headerOptions: { headerShown: false },
   },
 ];

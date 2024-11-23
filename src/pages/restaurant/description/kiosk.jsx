@@ -68,6 +68,7 @@ const Items = styled.div`
   justify-content: center;
   align-items: center;
 `;
+
 const Container = styled.div`
   width: 80%;
   flex: 1;
@@ -124,7 +125,15 @@ export default function Kiosk() {
   const [cartItems, setCartItems] = useState([]); // Cart state
   const [isCartVisible, setIsCartVisible] = useState(false); // Cart visibility
   const [showAddedModal, setShowAddedModal] = useState(false); // Alert modal
+  const navigate = useNavigate();
+  const location = useLocation();
 
+  const queryParams = new URLSearchParams(location.search);
+  const selectedOption = queryParams.get("option");
+
+  const handleClick = (item) => {
+    navigate(`/description/restaurant/main/?option=${item}`);
+  };
   // Handlers
   const handleMenuClick = (menu) => {
     setSelectedMenu(menu);
@@ -159,7 +168,11 @@ export default function Kiosk() {
         <BlackSide />
         <Sidebar>
           {sideItems.map((item, index) => (
-            <Items key={index} active={false}>
+            <Items
+              key={index}
+              active={item === selectedOption}
+              onClick={() => handleClick(item)}
+            >
               {item}
             </Items>
           ))}
